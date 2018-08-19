@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'maven'
+    id 'com.jfrog.bintray' version '1.8.0'
 }
 
 group 'com.pnuema.java'
@@ -14,3 +16,97 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+ext {
+    siteUrl = 'https://github.com/barnhill/barcode-java'
+    gitUrl = 'https://github.com/barnhill/barcode-java.git'
+    descr = 'Barcode image generation library in Java'
+}
+
+bintray {
+    if (System.getenv("BINTRAY_USER") != null)
+        user = System.getenv("BINTRAY_USER")
+    else
+        user = BINTRAY_USER
+
+    if (System.getenv("BINTRAY_APIKEY") != null)
+        key = System.getenv("BINTRAY_APIKEY")
+    else
+        key = BINTRAY_APIKEY
+
+    dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
+    publish = true //[Default: false] Whether version should be auto published after an upload
+    override = false //[Default: false] Whether to override version artifacts already published
+    pkg {
+        configurations = ['archives']
+        repo = "maven"
+        name = "barcode-java"
+        desc = descr
+        websiteUrl = "https://github.com/barnhill/barcode-java"
+        githubRepo = 'barnhill/barcode-java'
+        githubReleaseNotesFile = 'README.md'
+        issueTrackerUrl = 'https://github.com/barnhill/barcode-java/issues'
+        vcsUrl = "https://github.com/barnhill/barcode-java.git"
+        licenses = ["Apache-2.0"]
+        labels = ['java', 'barcode', 'image', 'jar', 'generator']
+        publicDownloadNumbers = true
+        publish = true
+        version {
+            gpg {
+                sign = true
+                if (System.getenv("BINTRAY_GPGPASSWORD") != null)
+                    passphrase = System.getenv("BINTRAY_GPGPASSWORD")
+                else
+                    passphrase = BINTRAY_GPGPASSWORD
+            }
+        }
+    }
+}
+
+task createPom {
+    pom {
+        project {
+            packaging 'jar'
+
+            name project.name
+            description descr
+            url siteUrl
+            inceptionYear '2018'
+
+            licenses {
+                license {
+                    name 'MIT License'
+                    url 'https://opensource.org/licenses/MIT'
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+            developers {
+                developer {
+                    id 'barnhill'
+                    name 'Brad Barnhill'
+                    email 'bradfordbarnhill@gmail.com'
+                }
+            }
+        }
+    }.writeTo("$buildDir/poms/pom-default.xml").writeTo("pom.xml")
+}
+build.dependsOn createPom

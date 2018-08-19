@@ -640,7 +640,7 @@ public class Barcode {
             case ITF14: {
                 // Automatically calculate the Width if applicable. Quite confusing with this
                 // barcode type, and it seems this method overestimates the minimum width. But
-                // at least it�s deterministic and doesn�t produce too small of a value.
+                // at least it's deterministic and doesn't produce too small of a value.
                 if (getBarWidth() != null) {
                     setWidth((int) (241 / 176.9 * encodedValue.length() * getBarWidth() + 1));
                 }

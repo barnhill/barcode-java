@@ -224,7 +224,7 @@ public class EAN13 extends BarcodeCommon implements IBarcode {
         createCountryCodeRange(960, 961, "GS1 UK OFFICE: GTIN-8 ALLOCATIONS");
         createCountryCodeRange(962, 969, "GS1 GLOBAL OFFICE: GTIN-8 ALLOCATIONS");
         createCountryCodeRange(977, 977, "SERIAL PUBLICATIONS (ISSN)");
-        createCountryCodeRange(978, 979, "BOOKLAND (ISBN) – 979-0 USED FOR SHEET MUSIC (ISMN-13, REPLACES DEPRECATED ISMN M- NUMBERS)");
+        createCountryCodeRange(978, 979, "BOOKLAND (ISBN) 979-0 USED FOR SHEET MUSIC (ISMN-13, REPLACES DEPRECATED ISMN M- NUMBERS)");
         createCountryCodeRange(980, 980, "REFUND RECEIPTS");
         createCountryCodeRange(981, 984, "GS1 COUPON IDENTIFICATION FOR COMMON CURRENCY AREAS");
         createCountryCodeRange(990, 999, "GS1 COUPON IDENTIFICATION");
