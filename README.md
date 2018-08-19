@@ -1,6 +1,3 @@
-# barcode-java
-BarcodeLib in Java
-
 # barcode-java ![Build Status](https://www.travis-ci.org/barnhill/barcode-java.svg?branch=master)
 
 ### Overview ###
