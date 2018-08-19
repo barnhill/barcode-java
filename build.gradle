@@ -4,6 +4,11 @@ plugins {
     id 'com.jfrog.bintray' version '1.8.0'
 }
 
+task wrapper(type: Wrapper) {
+    //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
+    gradleVersion = "4.9"
+}
+
 group 'com.pnuema.java'
 version '1.0'
 
