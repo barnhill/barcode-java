@@ -1,8 +1,10 @@
 plugins {
-    id 'java'
-    id 'maven'
-    id 'com.jfrog.bintray' version '1.8.0'
+    id 'java-library'
+    id 'com.jfrog.bintray' version '1.8.4'
 }
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 task wrapper(type: Wrapper) {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
@@ -54,6 +56,7 @@ bintray {
     else
         key = BINTRAY_APIKEY
 
+    publications = ['mavenJava']
     dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
     publish = true //[Default: false] Whether version should be auto published after an upload
     override = false //[Default: false] Whether to override version artifacts already published
@@ -83,35 +86,42 @@ bintray {
     }
 }
 
-task createPom {
-    pom {
-        project {
-            packaging 'jar'
-
-            name project.name
-            description descr
-            url siteUrl
-            inceptionYear '2018'
-
-            licenses {
-                license {
-                    name 'MIT License'
-                    url 'https://opensource.org/licenses/MIT'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId group
+            artifactId project.name
+            version version
+            pom {
+                name = project.name
+                packaging = 'jar'
+                description = descr
+                url = siteUrl
+                inceptionYear = '2018'
+                licenses {
+                    license {
+                        name = "MIT License"
+                        url = "https://opensource.org/licenses/MIT"
+                        distribution = "repo"
+                    }
                 }
-            }
-            scm {
-                connection gitUrl
-                developerConnection gitUrl
-                url siteUrl
-            }
-            developers {
-                developer {
-                    id 'barnhill'
-                    name 'Brad Barnhill'
-                    email 'bradfordbarnhill@gmail.com'
+                developers {
+                    developer {
+                        id = "barnhill"
+                        name = "Brad Barnhill"
+                        email = "bradfordbarnhill@gmail.com"
+                    }
+                }
+
+                scm {
+                    connection = gitUrl
+                    developerConnection = gitUrl
+                    url = siteUrl
                 }
             }
         }
-    }.writeTo("$buildDir/poms/pom-default.xml").writeTo("pom.xml")
+    }
 }
-build.dependsOn createPom
