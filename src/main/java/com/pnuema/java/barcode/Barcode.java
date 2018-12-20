@@ -19,7 +19,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  * Generates a barcode image of a specified symbology from a string of data.
  */
 public class Barcode {
-    public enum TYPE {UNSPECIFIED, UPCA, UPCE, UPC_SUPPLEMENTAL_2DIGIT, UPC_SUPPLEMENTAL_5DIGIT, EAN13, EAN8, Interleaved2of5, Standard2of5, Industrial2of5, CODE39, CODE39Extended, CODE39_Mod43, Codabar, PostNet, BOOKLAND, ISBN, JAN13, MSI_Mod10, MSI_2Mod10, MSI_Mod11, MSI_Mod11_Mod10, Modified_Plessey, CODE11, USD8, UCC12, UCC13, LOGMARS, CODE128, CODE128A, CODE128B, CODE128C, ITF14, CODE93, TELEPEN, FIM, PHARMACODE}
+    public enum TYPE {UNSPECIFIED, UPCA, UPCE, UPC_SUPPLEMENTAL_2DIGIT, UPC_SUPPLEMENTAL_5DIGIT, EAN13, EAN8, Interleaved2of5, Interleaved2of5_Mod10, Standard2of5, Standard2of5_Mod10, Industrial2of5, Industrial2of5_Mod10, CODE39, CODE39Extended, CODE39_Mod43, Codabar, PostNet, BOOKLAND, ISBN, JAN13, MSI_Mod10, MSI_2Mod10, MSI_Mod11, MSI_Mod11_Mod10, Modified_Plessey, CODE11, USD8, UCC12, UCC13, LOGMARS, CODE128, CODE128A, CODE128B, CODE128C, ITF14, CODE93, TELEPEN, FIM, PHARMACODE}
 
     public enum SaveTypes {JPG, BMP, PNG, GIF, TIFF, UNSPECIFIED}
 
@@ -521,12 +521,15 @@ public class Barcode {
             case UPCA:
                 ibarcode = new UPCA(rawData);
                 break;
+            case Industrial2of5_Mod10:
             case Industrial2of5:
+            case Standard2of5_Mod10:
             case Standard2of5:
-                ibarcode = new Standard2of5(rawData);
+                ibarcode = new Standard2of5(rawData, getEncodedType());
                 break;
+            case Interleaved2of5_Mod10:
             case Interleaved2of5:
-                ibarcode = new Interleaved2of5(rawData);
+                ibarcode = new Interleaved2of5(rawData, getEncodedType());
                 break;
             case UCC13:
             case EAN13:

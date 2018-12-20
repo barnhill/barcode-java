@@ -1,16 +1,20 @@
 package com.pnuema.java.barcode.symbologies;
 
+import com.pnuema.java.barcode.Barcode;
 import com.pnuema.java.barcode.BarcodeCommon;
 import com.pnuema.java.barcode.IBarcode;
+import com.pnuema.java.barcode.utils.Utils2of5;
 
 /**
  * Standard 2 of 5 encoding
  */
 public class Standard2of5 extends BarcodeCommon implements IBarcode {
-    private String[] S25_Code = {"11101010101110", "10111010101110", "11101110101010", "10101110101110", "11101011101010", "10111011101010", "10101011101110", "10101110111010", "11101010111010", "10111010111010"};
+    private final String[] S25_Code = {"11101010101110", "10111010101110", "11101110101010", "10101110101110", "11101011101010", "10111011101010", "10101011101110", "10101110111010", "11101010111010", "10111010111010"};
+    private Barcode.TYPE type;
 
-    public Standard2of5(String input) {
+    public Standard2of5(String input, Barcode.TYPE encodingType) {
         setRawData(input);
+        type = encodingType;
     }
 
     /**
@@ -21,14 +25,17 @@ public class Standard2of5 extends BarcodeCommon implements IBarcode {
     private String encodeStandard2Of5() {
         //check numeric only
         if (checkNumericOnly(getRawData())) {
-            error("ES25-2: Numeric Data Only");
+            error("ES25-1: Numeric Data Only");
         }
 
         StringBuilder result = new StringBuilder("11011010");
+        String data = getRawData() + (type == Barcode.TYPE.Standard2of5_Mod10 ? Utils2of5.CalculateMod10CheckDigit(getRawData()) : "");
 
-        for (char c : getRawData().toCharArray()) {
+        for (char c : data.toCharArray()) {
             result.append(S25_Code[Integer.parseInt(String.valueOf(c))]);
         }
+
+        result.append(type == Barcode.TYPE.Standard2of5_Mod10 ? S25_Code[Utils2of5.CalculateMod10CheckDigit(getRawData())] : "");
 
         //add ending bars
         result.append("1101011");
