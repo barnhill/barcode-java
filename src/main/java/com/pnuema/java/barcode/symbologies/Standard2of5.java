@@ -24,7 +24,7 @@ public class Standard2of5 extends BarcodeCommon implements IBarcode {
      */
     private String encodeStandard2Of5() {
         //check numeric only
-        if (checkNumericOnly(getRawData())) {
+        if (!checkNumericOnly(getRawData())) {
             error("ES25-1: Numeric Data Only");
         }
 

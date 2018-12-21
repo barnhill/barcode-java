@@ -29,11 +29,11 @@ public abstract class BarcodeCommon {
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     protected static boolean checkNumericOnly(String data) {
-        //This function takes a String of data and breaks it into parts and trys to do Int64.TryParse
+        //This function takes a String of data and breaks it into parts and trys to do a parse
         //This will verify that only numeric data is contained in the String passed in.  The complexity below
-        //was done to ensure that the minimum number of interations and checks could be performed.
+        //was done to ensure that the minimum number of iterations and checks could be performed.
 
-        //early check to see if the whole number can be parsed to improve efficency of this method
+        //early check to see if the whole number can be parsed to improve efficiency of this method
         if (data != null) {
             try {
                 Long.parseLong(data);
