@@ -1,4 +1,4 @@
-# barcode-java ![Build Status](https://www.travis-ci.org/barnhill/barcode-java.svg?branch=master)
+# barcode-java [ ![Download](https://api.bintray.com/packages/bradfordbarnhill/maven/barcode-java/images/download.svg) ](https://bintray.com/bradfordbarnhill/maven/barcode-java/_latestVersion) ![Build Status](https://www.travis-ci.org/barnhill/barcode-java.svg?branch=master)
 
 ### Overview ###
  
