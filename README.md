@@ -18,7 +18,7 @@ This library was designed to give an easy class for developers to use when they 
 
 The jar is available on JCenter and can be included via gradle:
 ```
-implementation 'com.pnuema.java:barcode:1.3'
+implementation 'com.pnuema.java:barcode:1.4'
 ```
 
 Then use the library to generate a barcode via:
