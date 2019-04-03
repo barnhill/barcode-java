@@ -308,9 +308,7 @@ public class Code128 extends BarcodeCommon implements IBarcode {
                 formattedData.add(String.valueOf(c));
             }
             return;
-        }
-
-        if (this.type == TYPES.C) {
+        } else if (this.type == TYPES.C) {
             if (!checkNumericOnly(getRawData())) {
                 error("EC128-6: Only numeric values can be encoded with C128-C.");
             }
