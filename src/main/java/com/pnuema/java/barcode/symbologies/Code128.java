@@ -19,6 +19,11 @@ public class Code128 extends BarcodeCommon implements IBarcode {
     private Entry startCharacter = null;
     private TYPES type = TYPES.DYNAMIC;
 
+    private class CodeCharacter {
+        public List<Entry> rows = new ArrayList<>();
+        public int col;
+    }
+
     private static class Entry {
         private String id;
         private String A;
@@ -209,17 +214,19 @@ public class Code128 extends BarcodeCommon implements IBarcode {
 
         return null;
     }
-    private List<Entry> findStartorCodeCharacter(String s) {
-        List<Entry> rows = new ArrayList<>();
+    private CodeCharacter findStartorCodeCharacter(String s) {
+        CodeCharacter returnValue = new CodeCharacter();
 
         //if two chars are numbers (or FNC1) then START_C or CODE_C
         if (s.length() > 1 && (Character.isDigit(s.toCharArray()[0]) || String.valueOf(s.toCharArray()[0]).equals(getChar(200)) && (Character.isDigit(s.toCharArray()[1]) || String.valueOf(s.toCharArray()[1]).equals(getChar(200))))) {
             if (startCharacter == null) {
                 startCharacter = findRow("A", "START_C");
-                rows.add(startCharacter);
+                returnValue.rows.add(startCharacter);
             } else {
-                rows.add(findRow("A", "CODE_C"));
+                returnValue.rows.add(findRow("A", "CODE_C"));
             }
+
+            returnValue.col = 1;
         } else {
             boolean AFound = false;
             boolean BFound = false;
@@ -227,21 +234,23 @@ public class Code128 extends BarcodeCommon implements IBarcode {
                 try {
                     if (!AFound && s.equals(row.A)) {
                         AFound = true;
+                        returnValue.col = 2;
 
                         if (startCharacter == null) {
                             startCharacter = findRow("A",  "START_A");
-                            rows.add(startCharacter);
+                            returnValue.rows.add(startCharacter);
                         } else {
-                            rows.add(findRow("B", "CODE_A"));//first column is FNC4 so use B
+                            returnValue.rows.add(findRow("B", "CODE_A"));//first column is FNC4 so use B
                         }
                     } else if (!BFound && s.equals(row.B)) {
                         BFound = true;
+                        returnValue.col = 1;
 
                         if (startCharacter == null) {
                             startCharacter = findRow("A", "START_B");
-                            rows.add(startCharacter);
+                            returnValue.rows.add(startCharacter);
                         } else {
-                            rows.add(findRow("A", "CODE_B"));
+                            returnValue.rows.add(findRow("A", "CODE_B"));
                         }
                     } else if (AFound && BFound) {
                         break;
@@ -251,12 +260,12 @@ public class Code128 extends BarcodeCommon implements IBarcode {
                 }
             }
 
-            if (rows.isEmpty()) {
+            if (returnValue.rows.isEmpty()) {
                 error("EC128-2: Could not determine start character.");
             }
         }
 
-        return rows;
+        return returnValue;
     }
 
     private String CalculateCheckDigit() {
@@ -364,15 +373,13 @@ public class Code128 extends BarcodeCommon implements IBarcode {
             }
         } else {
             try {
-                List<Entry> tempStartChars = findStartorCodeCharacter(formattedData.get(0));
-
                 //initial char with start char
-                currentCodeSet = tempStartChars.get(0);
-                currentCodeString = currentCodeSet.getA().substring(currentCodeSet.getA().length() - 1);
-                formattedData.add(0, currentCodeSet.getA());
+                currentCodeSet = null;
+                currentCodeString = "";
 
                 for (int i = 0; i < formattedData.size(); i++) {
-                    tempStartChars = findStartorCodeCharacter(formattedData.get(i));
+                    CodeCharacter codeCharacter = findStartorCodeCharacter(formattedData.get(i));
+                    List<Entry> tempStartChars = codeCharacter.rows;
 
                     //check all the start characters and see if we need to stay with the same codeset or if a change of sets is required
                     boolean sameCodeSet = false;
@@ -383,21 +390,21 @@ public class Code128 extends BarcodeCommon implements IBarcode {
                         }
                     }
 
-                    //change curent code string if not the same as the current code set
-                    if (!sameCodeSet) {
+                    //change current code string if not the same as the current code set
+                    if (currentCodeSet == null || !sameCodeSet) {
                         currentCodeSet = tempStartChars.get(0);
 
-                        switch (currentCodeString) {
-                            case "A":
-                                currentCodeString = currentCodeSet.getB().substring(currentCodeSet.getB().length() - 1);
+                        switch (codeCharacter.col) {
+                            case 0:
+                                currentCodeString = currentCodeSet.getA().substring(currentCodeSet.getA().length() - 1);
                                 formattedData.add(i++, currentCodeSet.getA());
                                 break;
-                            case "B":
-                                currentCodeString = currentCodeSet.getC().substring(currentCodeSet.getC().length() - 1);
+                            case 1:
+                                currentCodeString = currentCodeSet.getB().substring(currentCodeSet.getB().length() - 1);
                                 formattedData.add(i++, currentCodeSet.getB());
                                 break;
-                            case "C":
-                                currentCodeString = currentCodeSet.getA().substring(currentCodeSet.getA().length() - 1);
+                            case 2:
+                                currentCodeString = currentCodeSet.getC().substring(currentCodeSet.getC().length() - 1);
                                 formattedData.add(i++, currentCodeSet.getC());
                                 break;
                         }
