@@ -6,13 +6,13 @@ plugins {
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
-task wrapper(type: Wrapper) {
+wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "4.10.2"
+    gradleVersion = "5.3"
 }
 
 group 'com.pnuema.java'
-version '1.3'
+version '1.4'
 
 sourceCompatibility = 1.8
 
