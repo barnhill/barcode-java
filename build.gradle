@@ -8,7 +8,7 @@ apply plugin: 'maven-publish'
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "5.3"
+    gradleVersion = "5.4"
 }
 
 group 'com.pnuema.java'
@@ -25,12 +25,12 @@ dependencies {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+    archiveClassifier.set("sources")
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier.set("javadoc")
     from javadoc.destinationDir
 }
 
