@@ -79,6 +79,7 @@ class Labels {
             g.drawRect(0, LabelY, img.getWidth(), font.getSize());
 
             //draw datastring under the barcode image
+            g.setColor(Barcode.getForeColor());
             Rectangle rect = new Rectangle(0, LabelY, img.getWidth(), font.getSize());
             drawCenteredString(g, Barcode.getAlternateLabel() == null ? Barcode.getRawData() : Barcode.getAlternateLabel(), rect, font);
 
