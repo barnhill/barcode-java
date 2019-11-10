@@ -18,14 +18,13 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 /**
  * Generates a barcode image of a specified symbology from a string of data.
  */
+@SuppressWarnings("WeakerAccess")
 public class Barcode {
     public enum TYPE {UNSPECIFIED, UPCA, UPCE, UPC_SUPPLEMENTAL_2DIGIT, UPC_SUPPLEMENTAL_5DIGIT, EAN13, EAN8, Interleaved2of5, Interleaved2of5_Mod10, Standard2of5, Standard2of5_Mod10, Industrial2of5, Industrial2of5_Mod10, CODE39, CODE39Extended, CODE39_Mod43, Codabar, PostNet, BOOKLAND, ISBN, JAN13, MSI_Mod10, MSI_2Mod10, MSI_Mod11, MSI_Mod11_Mod10, Modified_Plessey, CODE11, USD8, UCC12, UCC13, LOGMARS, CODE128, CODE128A, CODE128B, CODE128C, ITF14, CODE93, TELEPEN, FIM, PHARMACODE}
 
     public enum SaveTypes {JPG, BMP, PNG, GIF, TIFF, UNSPECIFIED}
 
     public enum AlignmentPositions {CENTER, LEFT, RIGHT}
-
-    public enum LabelPositions {TOP, BOTTOM}
 
     private IBarcode ibarcode;
     private String rawData = "";
@@ -38,7 +37,7 @@ public class Barcode {
     private int width = 300;
     private int height = 150;
     private Font labelFont = new Font("Serif", Font.BOLD, 10);
-    private LabelPositions labelPositions = LabelPositions.BOTTOM;
+    private Labels.LabelPositions labelPositions = Labels.LabelPositions.BOTTOM;
 
     //Properties
     private AlignmentPositions alignmentPosition = AlignmentPositions.CENTER;
@@ -199,7 +198,7 @@ public class Barcode {
      *
      * @return Label location in relation to the barcode orientation
      */
-    public LabelPositions getLabelPosition() {
+    public Labels.LabelPositions getLabelPosition() {
         return labelPositions;
     }
 
@@ -208,7 +207,7 @@ public class Barcode {
      *
      * @param _LabelPosition Label location in relation to the barcode orientation
      */
-    public void setLabelPosition(LabelPositions _LabelPosition) {
+    public void setLabelPosition(Labels.LabelPositions _LabelPosition) {
         this.labelPositions = _LabelPosition;
     }
 
@@ -740,7 +739,7 @@ public class Barcode {
                         iBarWidth = getWidth() / encodedValue.length();
                     } else {
                         // Shift drawing down if top label
-                        if ((getLabelPosition().ordinal() & LabelPositions.TOP.ordinal()) > 0)
+                        if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0)
                             topLabelAdjustment = getLabelFont().getSize();
 
                         ILHeight -= getLabelFont().getSize();
@@ -811,7 +810,7 @@ public class Barcode {
                         ILHeight -= (labFont.getSize() / 2);
                     } else {
                         // Shift drawing down if top label.
-                        if ((getLabelPosition().ordinal() & LabelPositions.TOP.ordinal()) > 0) {
+                        if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0) {
                             topLabelAdjustment = getLabelFont().getSize();
                         }
 
@@ -870,7 +869,7 @@ public class Barcode {
 
                 if (isIncludeLabel()) {
                     // Shift drawing down if top label.
-                    if ((getLabelPosition().ordinal() & LabelPositions.TOP.ordinal()) > 0)
+                    if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0)
                         topLabelAdjustment = getLabelFont().getSize();
 
                     ILHeight -= getLabelFont().getSize();

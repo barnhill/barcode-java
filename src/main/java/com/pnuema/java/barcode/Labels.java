@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
  * Class to draw labels for differing barcode types
  */
 class Labels {
+    public enum LabelPositions {TOP, BOTTOM}
+
     /**
      * Draws Label for ITF-14 barcodes
      * @param Barcode Barcode to draw the label for
@@ -54,7 +56,7 @@ class Labels {
      * @param img Image representation of the barcode without the labels
      * @return Image representation of the barcode with labels applied
      */
-    public static Image labelGeneric(Barcode Barcode, BufferedImage img) {
+    static Image labelGeneric(Barcode Barcode, BufferedImage img) {
         try {
             Font font = Barcode.getLabelFont();
 
@@ -68,6 +70,7 @@ class Labels {
 
             int LabelY = 0;
 
+            //noinspection SwitchStatementWithTooFewBranches
             switch (Barcode.getLabelPosition()) {
                 case BOTTOM:
                     LabelY = img.getHeight() - (font.getSize());
@@ -96,7 +99,7 @@ class Labels {
      * @param img Image representation of the barcode without the labels
      * @return Image representation of the barcode with labels applied
      */
-    public static Image Label_EAN13(Barcode Barcode, BufferedImage img) {
+    static Image Label_EAN13(Barcode Barcode, BufferedImage img) {
         try {
             int iBarWidth = Barcode.getWidth() / Barcode.getEncodedValue().length();
             String defTxt = Barcode.getRawData();
