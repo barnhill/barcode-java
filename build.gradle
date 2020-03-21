@@ -8,7 +8,7 @@ apply plugin: 'maven-publish'
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "6.2"
+    gradleVersion = "6.2.2"
 }
 
 group 'com.pnuema.java'
