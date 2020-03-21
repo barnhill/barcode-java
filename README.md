@@ -31,8 +31,8 @@ Image img = barcode.encode(BarcodeLib.TYPE.UPCA, "038000356216");
 You can specify the width, height, foreground color, background color, and whether or not to include the label to display the data thats encoded with the image.
 
 ### Support ###
-If you find this or any of my software useful and decide it worth supporting.  You can do so here:  [Become a Patron!](https://www.patreon.com/bePatron?u=10143118)
+If you find this or any of my software useful and decide it worth supporting.  You can do so here:  [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QKT9PSYTDNSXS)
 
 ### Copyright and license ###
 
-Copyright 2018 Brad Barnhill. Code released under the [MIT License](https://github.com/bbarnhill/barcode-java/blob/master/LICENSE).
+Copyright 2018-2020 Brad Barnhill. Code released under the [MIT License](https://github.com/bbarnhill/barcode-java/blob/master/LICENSE).
