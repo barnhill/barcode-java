@@ -17,13 +17,13 @@ This library was designed to give an easy class for developers to use when they 
 ### Usage ###
 
 The jar is available on JCenter and can be included via gradle:
-```
+```Gradle
 implementation 'com.pnuema.java:barcode:1.7'
 ```
 
 Then use the library to generate a barcode via:
 
-```
+```Java
 Barcode b = new Barcode();
 Image img = barcode.encode(BarcodeLib.TYPE.UPCA, "038000356216");
 ```
