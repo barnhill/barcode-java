@@ -671,32 +671,33 @@ public class Barcode {
                 int pos = 0;
 
                 Graphics g = bitmap.createGraphics();
+                try {
+                    //fill background
+                    g.setColor(getBackColor());
+                    g.fillRect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                //fill background
-                g.setColor(getBackColor());
-                g.fillRect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                    //lines are fBarWidth wide so draw the appropriate color line vertically
+                    g.setColor(getForeColor());
 
-                //lines are fBarWidth wide so draw the appropriate color line vertically
-                g.setColor(getForeColor());
+                    while (pos < getEncodedValue().length()) {
+                        //draw the appropriate color line vertically
+                        if (getEncodedValue().charAt(pos) == '1') {
+                            g.fillRect((pos * iBarWidth) + shiftAdjustment + bearerwidth + iquietzone, 0, iBarWidth, getHeight());
+                        }
 
-                while (pos < getEncodedValue().length()) {
-                    //draw the appropriate color line vertically
-                    if (getEncodedValue().charAt(pos) == '1') {
-                        g.fillRect((pos * iBarWidth) + shiftAdjustment + bearerwidth + iquietzone, 0, iBarWidth, getHeight());
+                        pos++;
                     }
 
-                    pos++;
+                    //bearer bars
+                    int bearerBarWidth = ILHeight / 8;
+
+                    g.fillRect(0, 0, getWidth(), bearerBarWidth);//top
+                    g.fillRect(0, ILHeight - bearerBarWidth, getWidth(), bearerBarWidth);//bottom
+                    g.fillRect(0, 0, bearerBarWidth, ILHeight);//left
+                    g.fillRect(getWidth() - bearerBarWidth, bearerBarWidth, getWidth(), ILHeight);//right
+                } finally {
+                    g.dispose();
                 }
-
-                //bearer bars
-                int bearerBarWidth = ILHeight / 8;
-
-                g.fillRect(0, 0, getWidth(), bearerBarWidth);//top
-                g.fillRect(0, ILHeight-bearerBarWidth, getWidth(), bearerBarWidth);//bottom
-                g.fillRect(0, 0, bearerBarWidth, ILHeight);//left
-                g.fillRect(getWidth()-bearerBarWidth, bearerBarWidth, getWidth(), ILHeight);//right
-
-                g.dispose();
 
                 if (isIncludeLabel()) {
                     Labels.Label_ITF14(this, bitmap);
@@ -728,7 +729,7 @@ public class Barcode {
                     if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
                         // UPCA standardized label
                         String defTxt = getRawData();
-                        String labTxt = defTxt.substring(0, 1) + "--" + defTxt.substring(1, 6) + "--" + defTxt.substring(7);
+                        String labTxt = defTxt.charAt(0) + "--" + defTxt.substring(1, 6) + "--" + defTxt.substring(7);
 
                         Font font = getLabelFont();
                         Font labFont = new Font(font != null ? font.getFamily() : "Serif", Font.PLAIN, Labels.getFontsize(getWidth(), getHeight(), labTxt));
@@ -755,22 +756,26 @@ public class Barcode {
                 int pos = 0;
 
                 Graphics g = bitmap.createGraphics();
-                //clears the image and colors the entire background
+                try {
+                    //clears the image and colors the entire background
 
-                g.setColor(getBackColor());
-                g.fillRect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                    g.setColor(getBackColor());
+                    g.fillRect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                g.setColor(getForeColor());
+                    g.setColor(getForeColor());
 
-                //lines are fBarWidth wide so draw the appropriate color line vertically]
-                while (pos < getEncodedValue().length()) {
-                    if (getEncodedValue().charAt(pos) == '1') {
-                        g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth, ILHeight + topLabelAdjustment);
+                    //lines are fBarWidth wide so draw the appropriate color line vertically]
+                    while (pos < getEncodedValue().length()) {
+                        if (getEncodedValue().charAt(pos) == '1') {
+                            g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth, ILHeight + topLabelAdjustment);
+                        }
+
+                        pos++;
                     }
-
-                    pos++;
+                } finally {
+                    g.dispose();
                 }
-                g.dispose();
+
                 if (isIncludeLabel()) {
                     if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
                         Labels.Label_UPCA(this, bitmap);
@@ -801,7 +806,7 @@ public class Barcode {
                     if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
                         // EAN13 standardized label
                         String defTxt = getRawData();
-                        String labTxt = defTxt.substring(0, 1) + "--" + defTxt.substring(1, 6) + "--" + defTxt.substring(7);
+                        String labTxt = defTxt.charAt(0) + "--" + defTxt.substring(1, 6) + "--" + defTxt.substring(7);
 
                         Font font = getLabelFont();
                         Font labFont = new Font(font != null ? font.getFamily() : "Serif", Font.PLAIN, Labels.getFontsize(getWidth(), getHeight(), labTxt));
@@ -828,20 +833,22 @@ public class Barcode {
 
                 Graphics g = bitmap.createGraphics();
 
-                //clears the image and colors the entire background
-                g.setColor(getBackColor());
-                g.fillRect(0, 0, getWidth(), getHeight());
+                try {
+                    //clears the image and colors the entire background
+                    g.setColor(getBackColor());
+                    g.fillRect(0, 0, getWidth(), getHeight());
 
-                g.setColor(getForeColor());
+                    g.setColor(getForeColor());
 
-                while (pos < getEncodedValue().length()) {
-                    if (getEncodedValue().charAt(pos) == '1') {
-                        g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth, ILHeight + topLabelAdjustment);
+                    while (pos < getEncodedValue().length()) {
+                        if (getEncodedValue().charAt(pos) == '1') {
+                            g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth, ILHeight + topLabelAdjustment);
+                        }
+                        pos++;
                     }
-                    pos++;
+                } finally {
+                    g.dispose();
                 }
-
-                g.dispose();
 
                 if (isIncludeLabel()) {
                     if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
@@ -890,31 +897,33 @@ public class Barcode {
                 //draw image
                 int pos = 0;
 
-                Graphics2D g = bitmap.createGraphics();
+                Graphics g = bitmap.createGraphics();
 
-                //clears the image and colors the entire background
-                g.setColor(getBackColor());
-                g.fillRect(0, 0, getWidth(), getHeight());
+                try {
+                    //clears the image and colors the entire background
+                    g.setColor(getBackColor());
+                    g.fillRect(0, 0, getWidth(), getHeight());
 
-                g.setColor(getForeColor());
+                    g.setColor(getForeColor());
 
-                while (pos < getEncodedValue().length()) {
-                    if (getEncodedType() == TYPE.PostNet) {
-                        //draw half bars in postnet
-                        if (getEncodedValue().charAt(pos) == '0') {
-                            g.fillRect(pos * iBarWidth + shiftAdjustment, (ILHeight/2) + topLabelAdjustment, iBarWidth / 2, (ILHeight / 2) + topLabelAdjustment);
+                    while (pos < getEncodedValue().length()) {
+                        if (getEncodedType() == TYPE.PostNet) {
+                            //draw half bars in postnet
+                            if (getEncodedValue().charAt(pos) == '0') {
+                                g.fillRect(pos * iBarWidth + shiftAdjustment, (ILHeight / 2) + topLabelAdjustment, iBarWidth / 2, (ILHeight / 2) + topLabelAdjustment);
+                            } else {
+                                g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth / 2, ILHeight + topLabelAdjustment);
+                            }
                         } else {
-                            g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth / 2, ILHeight + topLabelAdjustment);
+                            if (getEncodedValue().charAt(pos) == '1') {
+                                g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth, ILHeight + topLabelAdjustment);
+                            }
                         }
-                    } else {
-                        if (getEncodedValue().charAt(pos) == '1') {
-                            g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth, ILHeight + topLabelAdjustment);
-                        }
+                        pos++;
                     }
-                    pos++;
+                } finally {
+                    g.dispose();
                 }
-
-                g.dispose();
 
                 if (isIncludeLabel()) {
                     Labels.labelGeneric(this, bitmap);
