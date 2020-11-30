@@ -231,23 +231,18 @@ public class UPCA extends BarcodeCommon implements IBarcode {
             String rawDataHolder = getRawData().substring(0, 11);
 
             //calculate check digit
-            int even = 0;
-            int odd = 0;
+            int sum = 0;
 
             for (int i = 0; i < rawDataHolder.length(); i++) {
+                int parseInt = Integer.parseInt(rawDataHolder.substring(i, i + 1));
                 if (i % 2 == 0) {
-                    odd += Integer.parseInt(rawDataHolder.substring(i, i + 1)) * 3;
+                    sum += parseInt * 3;
                 } else {
-                    even += Integer.parseInt(rawDataHolder.substring(i, i + 1));
+                    sum += parseInt;
                 }
             }
 
-            int total = even + odd;
-            int cs = total % 10;
-            cs = 10 - cs;
-            if (cs == 10) {
-                cs = 0;
-            }
+            int cs = (10 - sum % 10) % 10;
 
             setRawData(rawDataHolder + String.valueOf(cs).toCharArray()[0]);
         } catch (Exception ex) {
