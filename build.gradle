@@ -8,11 +8,11 @@ apply plugin: 'maven-publish'
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "6.7"
+    gradleVersion = "6.7.1"
 }
 
 group 'com.pnuema.java'
-version '1.7'
+version '1.8'
 
 sourceCompatibility = 1.8
 
