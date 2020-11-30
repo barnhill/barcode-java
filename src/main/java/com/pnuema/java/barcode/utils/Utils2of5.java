@@ -10,6 +10,6 @@ public final class Utils2of5 {
             even = !even;
         }
 
-        return sum % 10;
+        return (10 - sum % 10) % 10;
     }
 }
