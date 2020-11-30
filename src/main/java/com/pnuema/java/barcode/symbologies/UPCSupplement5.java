@@ -7,9 +7,9 @@ import com.pnuema.java.barcode.IBarcode;
  * UPC Supplement-5 encoding
  */
 public class UPCSupplement5 extends BarcodeCommon implements IBarcode {
-    private String[] EAN_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
-    private String[] EAN_CodeB = {"0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111"};
-    private String[] UPC_SUPP_5 = {"bbaaa", "babaa", "baaba", "baaab", "abbaa", "aabba", "aaabb", "ababa", "abaab", "aabab"};
+    private final String[] EAN_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
+    private final String[] EAN_CodeB = {"0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111"};
+    private final String[] UPC_SUPP_5 = {"bbaaa", "babaa", "baaba", "baaab", "abbaa", "aabba", "aaabb", "ababa", "abaab", "aabab"};
 
     public UPCSupplement5(String input) {
         setRawData(input);

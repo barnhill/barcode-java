@@ -9,7 +9,7 @@ import java.util.HashMap;
  * Telepen encoding
  */
 public class Telepen extends BarcodeCommon implements IBarcode {
-    private static HashMap<Character, String> Telepen_Code = new HashMap<>();
+    private static final HashMap<Character, String> Telepen_Code = new HashMap<>();
 
     public enum StartStopCode {
         START1(Character.forDigit(0, 10)),

@@ -9,10 +9,10 @@ import java.util.HashMap;
  * UPC-A encoding
  */
 public class UPCA extends BarcodeCommon implements IBarcode {
-    private String[] UPC_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
-    private String[] UPC_CodeB = {"1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100"};
+    private final String[] UPC_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
+    private final String[] UPC_CodeB = {"1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100"};
     private String countryAssigningManufacturerCode = "N/A";
-    private HashMap<String, String> countryCodes = new HashMap<>(); //is initialized by init_CountryCodes()
+    private final HashMap<String, String> countryCodes = new HashMap<>(); //is initialized by init_CountryCodes()
 
     public UPCA(String input) {
         setRawData(input);
@@ -65,7 +65,7 @@ public class UPCA extends BarcodeCommon implements IBarcode {
 
         //get the manufacturer assigning country
         this.init_CountryCodes();
-        String twodigitCode = "0" + getRawData().substring(0, 1);
+        String twodigitCode = "0" + getRawData().charAt(0);
         try {
             countryAssigningManufacturerCode = countryCodes.get(twodigitCode);
         } catch (Exception ex) {

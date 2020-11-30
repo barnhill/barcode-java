@@ -10,7 +10,7 @@ import com.pnuema.java.barcode.utils.Utils2of5;
  */
 public class Standard2of5 extends BarcodeCommon implements IBarcode {
     private final String[] S25_Code = {"10101110111010", "11101010101110", "10111010101110", "11101110101010", "10101110101110", "11101011101010", "10111011101010", "10101011101110", "11101010111010", "10111010111010"};
-    private Barcode.TYPE type;
+    private final Barcode.TYPE type;
 
     public Standard2of5(String input, Barcode.TYPE encodingType) {
         setRawData(input);

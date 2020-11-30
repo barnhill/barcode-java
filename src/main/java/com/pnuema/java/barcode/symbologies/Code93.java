@@ -11,12 +11,12 @@ import java.util.Objects;
  * Code 93 encoding
  */
 public class Code93 extends BarcodeCommon implements IBarcode {
-    private List<Entry> C93_Code = new ArrayList<>();
+    private final List<Entry> C93_Code = new ArrayList<>();
 
     private static class Entry {
-        private String value;
-        private String character;
-        private String encoding;
+        private final String value;
+        private final String character;
+        private final String encoding;
 
         Entry(String value, String character, String encoding) {
             this.value = value;

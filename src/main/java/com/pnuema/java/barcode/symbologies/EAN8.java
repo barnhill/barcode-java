@@ -7,8 +7,8 @@ import com.pnuema.java.barcode.IBarcode;
  * EAN-8 encoding
  */
 public class EAN8 extends BarcodeCommon implements IBarcode {
-    private String[] EAN_CodeA = { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
-    private String[] EAN_CodeC = { "1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100" };
+    private final String[] EAN_CodeA = { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
+    private final String[] EAN_CodeC = { "1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100" };
 
     public EAN8(String input) {
         setRawData(input);

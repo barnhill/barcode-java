@@ -13,23 +13,23 @@ import static com.pnuema.java.barcode.utils.CharUtils.getChar;
  */
 public class Code128 extends BarcodeCommon implements IBarcode {
     public enum TYPES { DYNAMIC, A, B, C };
-    private List<Entry> C128_Code = new ArrayList<>();
-    private List<String> formattedData = new ArrayList<>();
-    private List<String> encodedData = new ArrayList<>();
+    private final List<Entry> C128_Code = new ArrayList<>();
+    private final List<String> formattedData = new ArrayList<>();
+    private final List<String> encodedData = new ArrayList<>();
     private Entry startCharacter = null;
     private TYPES type = TYPES.DYNAMIC;
 
-    private class CodeCharacter {
+    private static class CodeCharacter {
         public List<Entry> rows = new ArrayList<>();
         public int col;
     }
 
     private static class Entry {
-        private String id;
-        private String A;
-        private String B;
-        private String C;
-        private String encoding;
+        private final String id;
+        private final String A;
+        private final String B;
+        private final String C;
+        private final String encoding;
 
         Entry(String id, String a, String b, String c, String encoding) {
             this.id = id;

@@ -7,7 +7,7 @@ import com.pnuema.java.barcode.IBarcode;
  * FIM encoding
  */
 public class FIM extends BarcodeCommon implements IBarcode {
-    public enum FIMTypes {FIM_A, FIM_B, FIM_C, FIM_D, FIM_E};
+    public enum FIMTypes {FIM_A, FIM_B, FIM_C, FIM_D, FIM_E}
 
     public FIM(String input) {
         input = input.trim();

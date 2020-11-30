@@ -9,8 +9,8 @@ import com.pnuema.java.barcode.IBarcode;
  */
 @SuppressWarnings("StringConcatenationInLoop")
 public class MSI extends BarcodeCommon implements IBarcode {
-    private String[] MSI_Code = {"100100100100", "100100100110", "100100110100", "100100110110", "100110100100", "100110100110", "100110110100", "100110110110", "110100100100", "110100100110"};
-    private Barcode.TYPE encodedType;
+    private final String[] MSI_Code = {"100100100100", "100100100110", "100100110100", "100100110110", "100110100100", "100110100110", "100110110100", "100110110110", "110100100100", "110100100110"};
+    private final Barcode.TYPE encodedType;
 
     public MSI(String input, Barcode.TYPE EncodedType) {
         encodedType = EncodedType;
