@@ -45,6 +45,7 @@ public class Barcode {
     private boolean includeLabel;
     private boolean standardizeLabel = true;
     private long encodingTime;
+    private long drawTime;
     private Integer barWidth;
     private Double aspectRatio;
 
@@ -74,6 +75,22 @@ public class Barcode {
     public Barcode(String data, TYPE iType) {
         this(data);
         encodedType = iType;
+    }
+
+    /**
+     * Get the Barcode libraries name
+     * @return Name string
+     */
+    public String getTitle() {
+        return getClass().getPackage().getImplementationTitle();
+    }
+
+    /**
+     * Get the Barcode libraries version
+     * @return Version string
+     */
+    public String getVersion() {
+        return getClass().getPackage().getImplementationVersion();
     }
 
     /**
@@ -306,7 +323,7 @@ public class Barcode {
      *
      * @return The number of milliseconds elapsed since encoding started
      */
-    public double getEncodingTime() {
+    public long getEncodingTime() {
         return encodingTime;
     }
 
@@ -317,6 +334,24 @@ public class Barcode {
      */
     private void setEncodingTime(long encodingTime) {
         this.encodingTime = encodingTime;
+    }
+
+    /**
+     * Gets the amount of time in milliseconds that it took to draw the barcode.
+     *
+     * @return The number of milliseconds elapsed since encoding started
+     */
+    public long getDrawTime() {
+        return drawTime;
+    }
+
+    /**
+     * Sets the amount of time in milliseconds that it took to encode and draw the barcode.
+     *
+     * @param drawTime The number of milliseconds elapsed since drawing started
+     */
+    private void setDrawTime(long drawTime) {
+        this.drawTime = drawTime;
     }
 
     /**
@@ -501,7 +536,7 @@ public class Barcode {
      * @return Image representation of the encoded value
      */
     private Image encode() {
-        Date dtStartTime = new Date();
+        long dtStartTime = System.currentTimeMillis();
 
         //make sure there is something to encode
         if (rawData.trim().isEmpty()) {
@@ -619,7 +654,7 @@ public class Barcode {
 
         encodedImage = generateImage();
 
-        setEncodingTime((new Date().getTime() - dtStartTime.getTime()));
+        setEncodingTime(System.currentTimeMillis() - dtStartTime);
 
         return encodedImage;
     }
@@ -636,7 +671,7 @@ public class Barcode {
         }
 
         BufferedImage bitmap;
-        Date dtStartTime = new Date();
+        long dtStartTime = System.currentTimeMillis();
 
         switch (this.encodedType) {
             case ITF14: {
@@ -935,7 +970,7 @@ public class Barcode {
 
         encodedImage = bitmap;
 
-        setEncodingTime(new Date().getTime() - dtStartTime.getTime());
+        setDrawTime(System.currentTimeMillis() - dtStartTime);
 
         return bitmap;
     }

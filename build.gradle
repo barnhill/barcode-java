@@ -12,7 +12,15 @@ wrapper {
 }
 
 group 'com.pnuema.java'
-version '1.8'
+version '1.9'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Barcode for Java',
+                   'Implementation-Version': archiveVersion,
+                   'Implementation-Vendor': 'Brad Barnhill'
+    }
+}
 
 sourceCompatibility = 1.8
 
