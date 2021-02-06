@@ -1,18 +1,15 @@
-plugins {
-    id 'java-library'
-    id 'com.jfrog.bintray' version '1.8.5'
-}
-
+apply plugin: 'java'
+apply plugin: 'signing'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "6.7.1"
+    gradleVersion = "6.8.2"
 }
 
 group 'com.pnuema.java'
-version '1.10'
+version '1.11'
 
 jar {
     manifest {
@@ -25,7 +22,7 @@ jar {
 sourceCompatibility = 1.8
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -43,84 +40,66 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 artifacts {
-    archives sourcesJar
-    archives javadocJar
+    archives jar, sourcesJar, javadocJar
 }
 
 ext {
-    siteUrl = 'https://github.com/barnhill/barcode-java'
-    gitUrl = 'https://github.com/barnhill/barcode-java.git'
+    baseUrl = 'https://github.com/barnhill'
+    siteUrl = baseUrl + '/barcode-java'
+    gitUrl = baseUrl + '/barcode-java.git'
     descr = 'Barcode image generation library in Java'
 }
 
-bintray {
-    user = System.getenv("BINTRAY_USER") != null ? System.getenv("BINTRAY_USER") : BINTRAY_USER
-    key = System.getenv("BINTRAY_APIKEY") != null ? System.getenv("BINTRAY_APIKEY") : BINTRAY_APIKEY
-
-    publications = ['mavenJava']
-    dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
-    publish = true //[Default: false] Whether version should be auto published after an upload
-    override = false //[Default: false] Whether to override version artifacts already published
-    pkg {
-        configurations = ['archives']
-        repo = "maven"
-        name = "barcode-java"
-        desc = descr
-        websiteUrl = "https://github.com/barnhill/barcode-java"
-        githubRepo = 'barnhill/barcode-java'
-        githubReleaseNotesFile = 'README.md'
-        issueTrackerUrl = 'https://github.com/barnhill/barcode-java/issues'
-        vcsUrl = "https://github.com/barnhill/barcode-java.git"
-        licenses = ["Apache-2.0"]
-        labels = ['java', 'barcode', 'image', 'jar', 'generator']
-        publicDownloadNumbers = true
-        publish = true
-        version {
-            gpg {
-                sign = true
-                if (System.getenv("BINTRAY_GPGPASSWORD") != null)
-                    passphrase = System.getenv("BINTRAY_GPGPASSWORD")
-                else
-                    passphrase = BINTRAY_GPGPASSWORD
-            }
-        }
-    }
+signing {
+    sign configurations.archives
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            groupId group
-            artifactId project.name
-            version version
-            pom {
-                name = project.name
-                packaging = 'jar'
-                description = descr
-                url = siteUrl
-                inceptionYear = '2018'
-                licenses {
-                    license {
-                        name = "MIT License"
-                        url = "https://opensource.org/licenses/MIT"
-                        distribution = "repo"
-                    }
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: SONATYPE_USER, password: SONATYPE_PASS)
+            }
+
+            pom.project {
+                name 'Barcode-Java'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Barcode image generation library in Java'
+                url siteUrl
+
+                organization {
+                    name 'Pnuema Productions'
+                    url baseUrl
                 }
-                developers {
-                    developer {
-                        id = "barnhill"
-                        name = "Brad Barnhill"
-                        email = "bradfordbarnhill@gmail.com"
-                    }
+
+                issueManagement {
+                    system 'GitHub'
+                    url siteUrl + '/issues'
                 }
 
                 scm {
-                    connection = gitUrl
-                    developerConnection = gitUrl
-                    url = siteUrl
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+
+                licenses {
+                    license {
+                        name "MIT License"
+                        url "https://opensource.org/licenses/MIT"
+                        distribution "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id "barnhill"
+                        name "Brad Barnhill"
+                        email "bradfordbarnhill@gmail.com"
+                    }
                 }
             }
         }
