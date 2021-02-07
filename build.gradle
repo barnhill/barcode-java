@@ -54,8 +54,8 @@ signing {
     sign configurations.archives
 }
 
-sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : SONATYPE_USER
-sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : SONATYPE_PASS
+def sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : SONATYPE_USER
+def sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : SONATYPE_PASS
 
 uploadArchives {
     repositories {
