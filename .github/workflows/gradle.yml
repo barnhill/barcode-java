@@ -17,12 +17,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew assemble -x signArchives
       env:
-        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-        BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
-        BINTRAY_GPGPASSWORD: ${{ secrets.BINTRAY_GPGPASSWORD }}
         SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
         SONATYPE_PASS: ${{ secrets.SONATYPE_PASS }}
-        SNAPSHOT_REPOSITORY_URL: ${{ secrets.SNAPSHOT_REPOSITORY_URL }}
-        RELEASE_REPOSITORY_URL: ${{ secrets.RELEASE_REPOSITORY_URL }}
