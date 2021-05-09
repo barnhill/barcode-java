@@ -14,10 +14,21 @@ public class EAN13 extends BarcodeCommon implements IBarcode {
     private final String[] EAN_CodeC = { "1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100" };
     private final String[] EAN_Pattern = { "aaaaaa", "aababb", "aabbab", "aabbba", "abaabb", "abbaab", "abbbaa", "ababab", "ababba", "abbaba" };
     private final TreeMap<Integer, String> countryCodes = new TreeMap<>(); //is initialized by initCountryCodes()
+    private String assigningCountry = "";
+    private boolean disableCountryCodeParsing = false;
 
     public EAN13(String input) {
         setRawData(input);
         calculateCheckDigit();
+    }
+
+    public EAN13(String input, boolean disableCountryCodeParsing) {
+        this(input);
+        this.disableCountryCodeParsing = disableCountryCodeParsing;
+    }
+
+    public String getAssigningCountry() {
+        return assigningCountry;
     }
 
     /**
@@ -68,6 +79,14 @@ public class EAN13 extends BarcodeCommon implements IBarcode {
         //add ending bars
         result.append("101");
 
+        if (!disableCountryCodeParsing) {
+            assigningCountry = parseCountryCode();
+        }
+
+        return result.toString();
+    }
+
+    private String parseCountryCode() {
         //get the manufacturer assigning country
         initCountryCodes();
         String countryAssigningManufacturerCode = "N/A";
@@ -85,7 +104,7 @@ public class EAN13 extends BarcodeCommon implements IBarcode {
             countryCodes.clear();
         }
 
-        return result.toString();
+        return countryAssigningManufacturerCode;
     }
 
     private void createCountryCodeRange(int startingNumber, int endingNumber, String countryDescription) {
