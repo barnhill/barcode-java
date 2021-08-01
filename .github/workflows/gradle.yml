@@ -1,7 +1,10 @@
 name: barcode-java CI
 
-on: 
+on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 
