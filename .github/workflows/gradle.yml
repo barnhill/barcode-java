@@ -26,10 +26,10 @@ jobs:
         check-latest: true
     - name: Build with Gradle
       run: ./gradlew build -x signArchives
+      env:
+        mavenCentralUsername: ${{ secrets.SONATYPE_USER }}
+        mavenCentralPassword: ${{ secrets.SONATYPE_PASS }}
     - uses: actions/upload-artifact@v2
       with:
         name: Package
         path: build/libs
-      env:
-        mavenCentralUsername: ${{ secrets.SONATYPE_USER }}
-        mavenCentralPassword: ${{ secrets.SONATYPE_PASS }}
