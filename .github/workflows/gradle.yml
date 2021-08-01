@@ -25,7 +25,11 @@ jobs:
         java-version: ${{ matrix.java }}
         check-latest: true
     - name: Build with Gradle
-      run: ./gradlew assemble -x signArchives
+      run: ./gradlew build -x signArchives
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Package
+        path: build/libs
       env:
         SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
         SONATYPE_PASS: ${{ secrets.SONATYPE_PASS }}
