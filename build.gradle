@@ -64,6 +64,6 @@ signing {
     sign configurations.archives
 }
 
-def sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : mavenCentralUsername
-def sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : mavenCentralPassword
+def sonatypeUser = System.getenv("mavenCentralUsername") != null ? System.getenv("mavenCentralUsername") : mavenCentralUsername
+def sonatypePass = System.getenv("mavenCentralPassword") != null ? System.getenv("mavenCentralPassword") : mavenCentralPassword
 
