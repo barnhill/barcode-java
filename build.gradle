@@ -1,15 +1,24 @@
 apply plugin: 'java'
 apply plugin: 'signing'
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: "com.vanniktech.maven.publish"
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "6.8.2"
+    gradleVersion = "7.1.1"
 }
 
 group 'com.pnuema.java'
 version '1.11'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
+    }
+}
 
 jar {
     manifest {
@@ -55,57 +64,6 @@ signing {
     sign configurations.archives
 }
 
-def sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : SONATYPE_USER
-def sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : SONATYPE_PASS
+def sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : mavenCentralUsername
+def sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : mavenCentralPassword
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: sonatypeUser, password: sonatypePass)
-            }
-
-            pom.project {
-                name 'Barcode-Java'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'Barcode image generation library in Java'
-                url siteUrl
-
-                organization {
-                    name 'Pnuema Productions'
-                    url baseUrl
-                }
-
-                issueManagement {
-                    system 'GitHub'
-                    url siteUrl + '/issues'
-                }
-
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-
-                licenses {
-                    license {
-                        name "MIT License"
-                        url "https://opensource.org/licenses/MIT"
-                        distribution "repo"
-                    }
-                }
-
-                developers {
-                    developer {
-                        id "barnhill"
-                        name "Brad Barnhill"
-                        email "bradfordbarnhill@gmail.com"
-                    }
-                }
-            }
-        }
-    }
-}
