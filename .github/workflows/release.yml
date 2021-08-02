@@ -2,11 +2,6 @@ name: Maven Central Release
 
 on:
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Note'
-        required: false
-        default: 'warning'
 
 jobs:
   MavenCentralRelease:
@@ -15,8 +10,6 @@ jobs:
       matrix:
         java: [ '11' ]
 
-  sign:
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
