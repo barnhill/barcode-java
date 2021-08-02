@@ -1,18 +1,19 @@
-name: Maven Central Release
+name: barcode-java Release
 
 on:
   workflow_dispatch:
-    inputs: 
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
       tags:
         required: false
-        description: 'Manual Run'
+        description: 'Test scenario tags'
 
 jobs:
-  MavenCentralRelease:
+  mavencentral:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java: [ '11' ]
 
     steps:
       - uses: actions/checkout@v2
