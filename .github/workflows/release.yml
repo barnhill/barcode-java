@@ -2,6 +2,11 @@ name: Maven Central Release
 
 on:
   workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Note'
+        required: false
+        default: 'warning'
 
 jobs:
   MavenCentralRelease:
