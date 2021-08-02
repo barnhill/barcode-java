@@ -43,18 +43,10 @@ jobs:
           distribution: 'adopt'
           java-version: 11
           check-latest: true
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v3
-        with:
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
       - name: Build with Gradle
         run: ./gradlew build
         env:
-          mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
-          mavenCentralPassword: ${{ secrets.mavenCentralPassword }}
-          ORG_GRADLE_PROJECT_signing.keyId: ${{ secrets.GPG_SIGNING_KEY_ID }}
-          ORG_GRADLE_PROJECT_signing.password: ${{ secrets.GPG_PASSPHRASE }}
-          ORG_GRADLE_PROJECT_signing.gnupg.executable: gpg
-          ORG_GRADLE_PROJECT_signing.gnupg.keyName: ${{ secrets.GPG_SIGNING_KEY_ID }}
-          ORG_GRADLE_PROJECT_signatory.keyId: ${{ secrets.GPG_SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.mavenCentralPassword }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY  }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD  }}
