@@ -1,4 +1,4 @@
-# barcode-java [ ![Download](https://api.bintray.com/packages/bradfordbarnhill/maven/barcode-java/images/download.svg) ](https://bintray.com/bradfordbarnhill/maven/barcode-java/_latestVersion) ![barcode-java CI](https://github.com/barnhill/barcode-java/workflows/barcode-java%20CI/badge.svg)
+# barcode-java ![barcode-java CI](https://github.com/barnhill/barcode-java/workflows/barcode-java%20CI/badge.svg)
 
 ### Overview ###
  
@@ -16,9 +16,9 @@ This library was designed to give an easy class for developers to use when they 
 
 ### Usage ###
 
-The jar is available on JCenter and can be included via gradle:
+The jar is available in Maven Central and can be included via gradle:
 ```Gradle
-implementation 'com.pnuema.java:barcode:1.9'
+implementation 'com.pnuema.java:barcode:1.11'
 ```
 
 Then use the library to generate a barcode via:
@@ -35,4 +35,4 @@ If you find this or any of my software useful and decide its worth supporting.  
 
 ### Copyright and license ###
 
-Copyright 2018-2020 Brad Barnhill. Code released under the [MIT License](https://github.com/bbarnhill/barcode-java/blob/master/LICENSE).
+Copyright 2018-2021 Brad Barnhill. Code released under the [MIT License](https://github.com/bbarnhill/barcode-java/blob/master/LICENSE).
