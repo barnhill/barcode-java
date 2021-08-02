@@ -51,8 +51,7 @@ jobs:
           git-user-signingkey: true
           git-commit-gpgsign: true
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build -Psigning.keyId=${{secrets.GPG_SIGNING_KEY_ID}}
         env:
           mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
           mavenCentralPassword: ${{ secrets.mavenCentralPassword }}
-          ORG_GRADLE_PROJECT_signatory.keyId: ${{ secrets.GPG_SIGNING_KEY_ID }}
