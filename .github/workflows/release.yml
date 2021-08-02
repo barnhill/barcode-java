@@ -2,6 +2,10 @@ name: Maven Central Release
 
 on:
   workflow_dispatch:
+    inputs: 
+      tags:
+        required: false
+        description: 'Manual Run'
 
 jobs:
   MavenCentralRelease:
