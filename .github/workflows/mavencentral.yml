@@ -2,14 +2,6 @@ name: barcode-java Release
 
 on:
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-      tags:
-        required: false
-        description: 'Test scenario tags'
 
 jobs:
   mavencentral:
