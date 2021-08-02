@@ -48,10 +48,8 @@ jobs:
         with:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          git-user-signingkey: true
-          git-commit-gpgsign: true
       - name: Build with Gradle
-        run: ./gradlew build -Psignatory.keyId=${{secrets.GPG_SIGNING_KEY_ID}}
+        run: ./gradlew build
         env:
           mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
           mavenCentralPassword: ${{ secrets.mavenCentralPassword }}
