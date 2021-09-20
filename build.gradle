@@ -52,13 +52,6 @@ artifacts {
     archives jar, sourcesJar, javadocJar
 }
 
-ext {
-    baseUrl = 'https://github.com/barnhill'
-    siteUrl = baseUrl + '/barcode-java'
-    gitUrl = baseUrl + '/barcode-java.git'
-    descr = 'Barcode image generation library in Java'
-}
-
 signing {
     useGpgCmd()
     sign configurations.archives
