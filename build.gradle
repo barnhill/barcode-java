@@ -5,7 +5,7 @@ apply plugin: "com.vanniktech.maven.publish"
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "7.2"
+    gradleVersion = "7.3.3"
 }
 
 group 'com.pnuema.java'
@@ -16,7 +16,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.18.0'
     }
 }
 
