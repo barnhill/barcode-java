@@ -24,7 +24,7 @@ implementation 'com.pnuema.java:barcode:1.11'
 Then use the library to generate a barcode via:
 
 ```Java
-Barcode b = new Barcode();
+Barcode barcode = new Barcode();
 Image img = barcode.encode(BarcodeLib.TYPE.UPCA, "038000356216");
 ```
 
