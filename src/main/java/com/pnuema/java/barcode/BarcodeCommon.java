@@ -26,7 +26,7 @@ public abstract class BarcodeCommon {
 
     protected void error(String ErrorMessage) {
         errors.add(ErrorMessage);
-        throw new RuntimeException(ErrorMessage);
+        throw new BarcodeException(ErrorMessage);
     }
 
     protected static boolean checkNumericOnly(String data) {

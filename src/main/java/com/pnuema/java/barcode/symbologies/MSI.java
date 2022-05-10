@@ -2,6 +2,7 @@ package com.pnuema.java.barcode.symbologies;
 
 import com.pnuema.java.barcode.Barcode;
 import com.pnuema.java.barcode.BarcodeCommon;
+import com.pnuema.java.barcode.EncodingType;
 import com.pnuema.java.barcode.IBarcode;
 
 /**
@@ -10,9 +11,9 @@ import com.pnuema.java.barcode.IBarcode;
 @SuppressWarnings("StringConcatenationInLoop")
 public class MSI extends BarcodeCommon implements IBarcode {
     private final String[] MSI_Code = {"100100100100", "100100100110", "100100110100", "100100110110", "100110100100", "100110100110", "100110110100", "100110110110", "110100100100", "110100100110"};
-    private final Barcode.TYPE encodedType;
+    private final EncodingType encodedType;
 
-    public MSI(String input, Barcode.TYPE EncodedType) {
+    public MSI(String input, EncodingType EncodedType) {
         encodedType = EncodedType;
         setRawData(input);
     }
@@ -31,13 +32,13 @@ public class MSI extends BarcodeCommon implements IBarcode {
         String PreEncoded = getRawData();
 
         //get checksum
-        if (encodedType == Barcode.TYPE.MSI_Mod10 || encodedType == Barcode.TYPE.MSI_2Mod10) {
+        if (encodedType == EncodingType.MSI_Mod10 || encodedType == EncodingType.MSI_2Mod10) {
             String odds = "";
             String evens = "";
             for (int i = PreEncoded.length() - 1; i >= 0; i -= 2) {
-                odds = String.valueOf(PreEncoded.toCharArray()[i]) + odds;
+                odds = PreEncoded.toCharArray()[i] + odds;
                 if (i - 1 >= 0)
-                    evens = String.valueOf(PreEncoded.toCharArray()[i - 1]) + evens;
+                    evens = PreEncoded.toCharArray()[i - 1] + evens;
             }
 
             //multiply odds by 2
@@ -56,7 +57,7 @@ public class MSI extends BarcodeCommon implements IBarcode {
             PreEncoded += String.valueOf(checksum);
         }
 
-        if (encodedType == Barcode.TYPE.MSI_Mod11 || encodedType == Barcode.TYPE.MSI_Mod11_Mod10) {
+        if (encodedType == EncodingType.MSI_Mod11 || encodedType == EncodingType.MSI_Mod11_Mod10) {
             int sum = 0;
             int weight = 2;
             for (int i = PreEncoded.length() - 1; i >= 0; i--) {
@@ -71,7 +72,7 @@ public class MSI extends BarcodeCommon implements IBarcode {
             PreEncoded += String.valueOf(checksum);
         }
 
-        if (encodedType == Barcode.TYPE.MSI_2Mod10 || encodedType == Barcode.TYPE.MSI_Mod11_Mod10) {
+        if (encodedType == EncodingType.MSI_2Mod10 || encodedType == EncodingType.MSI_Mod11_Mod10) {
             //get second check digit if 2 mod 10 was selected or Mod11/Mod10
             String odds = "";
             String evens = "";
