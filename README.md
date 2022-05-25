@@ -28,6 +28,8 @@ Barcode barcode = new Barcode();
 Image img = barcode.encode(BarcodeLib.TYPE.UPCA, "038000356216");
 ```
 
+![upca](https://user-images.githubusercontent.com/3878158/170283065-42d6c9f5-1e97-47dc-91da-f95ac68da909.jpg)
+
 You can specify the width, height, foreground color, background color, and whether or not to include the label to display the data thats encoded with the image.
 
 ### Support ###
