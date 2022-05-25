@@ -37,4 +37,4 @@ If you find this or any of my software useful and decide its worth supporting.  
 
 ### Copyright and license ###
 
-Copyright 2018-2021 Brad Barnhill. Code released under the [MIT License](https://github.com/bbarnhill/barcode-java/blob/master/LICENSE).
+Copyright 2018-2022 Brad Barnhill. Code released under the [MIT License](https://github.com/bbarnhill/barcode-java/blob/master/LICENSE).
