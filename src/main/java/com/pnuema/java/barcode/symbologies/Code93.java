@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Code 93 encoding
  */
-public class Code93 extends BarcodeCommon implements IBarcode {
+public class Code93 extends BarcodeCommon {
     private final List<Entry> C93_Code = new ArrayList<>();
 
     private static class Entry {

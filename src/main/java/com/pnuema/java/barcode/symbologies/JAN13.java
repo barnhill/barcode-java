@@ -6,7 +6,7 @@ import com.pnuema.java.barcode.IBarcode;
 /**
  * JAN-13 encoding
  */
-public class JAN13 extends BarcodeCommon implements IBarcode {
+public class JAN13 extends BarcodeCommon {
     public JAN13(String input) {
         setRawData(input);
     }

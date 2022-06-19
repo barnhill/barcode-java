@@ -3,7 +3,7 @@ package com.pnuema.java.barcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BarcodeCommon {
+public abstract class BarcodeCommon implements IBarcode {
     private String rawData = "";
     private final List<String> errors = new ArrayList<>();
 

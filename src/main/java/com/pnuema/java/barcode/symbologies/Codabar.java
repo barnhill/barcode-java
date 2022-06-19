@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Codabar encoding
  */
-public class Codabar extends BarcodeCommon implements IBarcode {
+public class Codabar extends BarcodeCommon {
     private final HashMap<Character, String> codabarCode = new HashMap<>();
 
     public Codabar(String input) {

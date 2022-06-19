@@ -9,7 +9,7 @@ import com.pnuema.java.barcode.utils.Utils2of5;
 /**
  * Interleaved 2 of 5 encoding
  */
-public class Interleaved2of5 extends BarcodeCommon implements IBarcode {
+public class Interleaved2of5 extends BarcodeCommon {
     private final String[] I25_Code = {"NNWWN", "WNNNW", "NWNNW", "WWNNN", "NNWNW", "WNWNN", "NWWNN", "NNNWW", "WNNWN", "NWNWN"};
     private final EncodingType type;
 

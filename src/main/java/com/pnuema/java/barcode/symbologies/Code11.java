@@ -6,7 +6,7 @@ import com.pnuema.java.barcode.IBarcode;
 /**
  * Code 11 encoding
  */
-public class Code11 extends BarcodeCommon implements IBarcode {
+public class Code11 extends BarcodeCommon {
     private final String[] C11_Code = { "101011", "1101011", "1001011", "1100101", "1011011", "1101101", "1001101", "1010011", "1101001", "110101", "101101", "1011001" };
 
     public Code11(String input) {

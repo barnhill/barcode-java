@@ -28,7 +28,7 @@ jar {
     }
 }
 
-sourceCompatibility = 1.11
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()

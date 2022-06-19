@@ -6,7 +6,7 @@ import com.pnuema.java.barcode.IBarcode;
 /**
  * UPC-E encoding
  */
-public class UPCE extends BarcodeCommon implements IBarcode {
+public class UPCE extends BarcodeCommon {
     private final String[] EAN_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
     private final String[] EAN_CodeB = {"0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111"};
     private final String[] UPCE_Code_0 = {"bbbaaa", "bbabaa", "bbaaba", "bbaaab", "babbaa", "baabba", "baaabb", "bababa", "babaab", "baabab"};
