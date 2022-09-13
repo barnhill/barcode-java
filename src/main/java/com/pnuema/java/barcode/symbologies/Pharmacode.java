@@ -6,7 +6,7 @@ import com.pnuema.java.barcode.IBarcode;
 /**
  * Pharmacode encoding
  */
-public class Pharmacode extends BarcodeCommon implements IBarcode {
+public class Pharmacode extends BarcodeCommon {
     /**
      * Encodes with Pharmacode.
      *

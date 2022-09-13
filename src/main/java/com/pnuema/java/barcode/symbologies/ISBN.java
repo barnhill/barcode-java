@@ -6,7 +6,7 @@ import com.pnuema.java.barcode.IBarcode;
 /**
  * ISBN encoding
  */
-public class ISBN extends BarcodeCommon implements IBarcode {
+public class ISBN extends BarcodeCommon {
     public ISBN(String input) {
         setRawData(input);
     }
@@ -21,7 +21,7 @@ public class ISBN extends BarcodeCommon implements IBarcode {
             error("EBOOKLANDISBN-1: Numeric Data Only");
         }
 
-        String type = "UNKNOWN";
+        String type = null;
         if (getRawData().length() == 10 || getRawData().length() == 9) {
             if (getRawData().length() == 10) {
                 setRawData(getRawData().substring(0, 9));
@@ -36,7 +36,7 @@ public class ISBN extends BarcodeCommon implements IBarcode {
         }
 
         //check to see if its an unknown type
-        if ("UNKNOWN".equals(type)) {
+        if (type == null) {
             error("EBOOKLANDISBN-2: Invalid input.  Must start with 978 and be length must be 9, 10, 12, 13 characters.");
         }
 

@@ -6,7 +6,7 @@ import com.pnuema.java.barcode.IBarcode;
 /**
  * Postnet encoding
  */
-public class Postnet extends BarcodeCommon implements IBarcode {
+public class Postnet extends BarcodeCommon {
     private final String[] POSTNET_Code = {"11000", "00011", "00101", "00110", "01001", "01010", "01100", "10001", "10010", "10100"};
 
     public Postnet(String input) {

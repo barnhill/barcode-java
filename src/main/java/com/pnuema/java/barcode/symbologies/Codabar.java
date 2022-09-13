@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Codabar encoding
  */
-public class Codabar extends BarcodeCommon implements IBarcode {
+public class Codabar extends BarcodeCommon {
     private final HashMap<Character, String> codabarCode = new HashMap<>();
 
     public Codabar(String input) {
@@ -24,10 +24,11 @@ public class Codabar extends BarcodeCommon implements IBarcode {
 
         //check first char to make sure its a start/stop char
         switch (String.valueOf(getRawData().charAt(0)).toUpperCase().trim()) {
-            case "A": break;
-            case "B": break;
-            case "C": break;
-            case "D": break;
+            case "A":
+            case "B":
+            case "C":
+            case "D":
+                break;
             default:
                 error("ECODABAR-2: Data format invalid. (Invalid START character)");
                 break;
@@ -35,13 +36,14 @@ public class Codabar extends BarcodeCommon implements IBarcode {
 
         //check the ending char to make sure its a start/stop char
         switch (String.valueOf(getRawData().charAt(getRawData().trim().length() - 1)).trim().toUpperCase()) {
-        case "A": break;
-        case "B": break;
-        case "C": break;
-        case "D": break;
-        default:
-            error("ECODABAR-3: Data format invalid. (Invalid STOP character)");
-            break;
+            case "A":
+            case "B":
+            case "C":
+            case "D":
+                break;
+            default:
+                error("ECODABAR-3: Data format invalid. (Invalid STOP character)");
+                break;
         }
 
         //populate the hashtable to begin the process

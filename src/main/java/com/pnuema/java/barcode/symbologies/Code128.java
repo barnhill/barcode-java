@@ -11,11 +11,10 @@ import static com.pnuema.java.barcode.utils.CharUtils.getChar;
 /**
  * Code 128 encoding
  */
-public class Code128 extends BarcodeCommon implements IBarcode {
+public class Code128 extends BarcodeCommon {
     public enum TYPES { DYNAMIC, A, B, C };
     private final List<Entry> C128_Code = new ArrayList<>();
     private final List<String> formattedData = new ArrayList<>();
-    private final List<String> encodedData = new ArrayList<>();
     private Entry startCharacter = null;
     private TYPES type = TYPES.DYNAMIC;
 
@@ -460,23 +459,19 @@ public class Code128 extends BarcodeCommon implements IBarcode {
             }
 
             encodedData.append(E_Row.encoding);
-            this.encodedData.add(E_Row.encoding);
         }
 
         //add the check digit
         encodedData.append(CalculateCheckDigit());
-        this.encodedData.add(CalculateCheckDigit());
 
         //add the stop character
         Entry stopChar = findRow("A", "STOP");
         if (stopChar != null) {
             encodedData.append(stopChar.encoding);
-            this.encodedData.add(stopChar.encoding);
         }
 
         //add the termination bars
         encodedData.append("11");
-        this.encodedData.add("11");
 
         return encodedData.toString();
     }

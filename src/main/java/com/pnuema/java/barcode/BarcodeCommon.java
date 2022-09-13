@@ -3,7 +3,7 @@ package com.pnuema.java.barcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BarcodeCommon {
+public abstract class BarcodeCommon implements IBarcode {
     private String rawData = "";
     private final List<String> errors = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public abstract class BarcodeCommon {
 
     protected void error(String ErrorMessage) {
         errors.add(ErrorMessage);
-        throw new RuntimeException(ErrorMessage);
+        throw new BarcodeException(ErrorMessage);
     }
 
     protected static boolean checkNumericOnly(String data) {

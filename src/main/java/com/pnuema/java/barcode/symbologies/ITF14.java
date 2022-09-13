@@ -6,7 +6,7 @@ import com.pnuema.java.barcode.IBarcode;
 /**
  * ITF-14 encoding
  */
-public class ITF14 extends BarcodeCommon implements IBarcode {
+public class ITF14 extends BarcodeCommon {
     private final String[] ITF14_Code = {"NNWWN", "WNNNW", "NWNNW", "WWNNN", "NNWNW", "WNWNN", "NWWNN", "NNNWW", "WNNWN", "NWNWN"};
 
     public ITF14(String input) {
