@@ -30,7 +30,6 @@ public class Barcode {
     private String encodedValue = "";
     private String countryAssigningManufacturerCode = "N/A";
     private EncodingType encodedType = EncodingType.UNSPECIFIED;
-    private Image encodedImage = null;
     private Color foreColor = Color.BLACK;
     private Color backColor = Color.WHITE;
     private int width = 300;
@@ -603,11 +602,11 @@ public class Barcode {
         encodedValue = ibarcode.getEncodedValue();
         rawData = ibarcode.getRawData();
 
-        encodedImage = generateImage();
+        Image image = generateImage();
 
         setEncodingTime(System.currentTimeMillis() - dtStartTime);
 
-        return encodedImage;
+        return image;
     }
 
     /**
@@ -918,8 +917,6 @@ public class Barcode {
                 break;
             }
         }
-
-        encodedImage = bitmap;
 
         setDrawTime(System.currentTimeMillis() - dtStartTime);
 
