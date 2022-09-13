@@ -775,7 +775,7 @@ public class Barcode {
                         iBarWidth = getWidth() / encodedValue.length();
                     } else {
                         // Shift drawing down if top label
-                        if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0)
+                        if (getLabelPosition() == Labels.LabelPositions.TOP)
                             topLabelAdjustment = getLabelFont().getSize();
 
                         ILHeight -= getLabelFont().getSize();
@@ -850,7 +850,7 @@ public class Barcode {
                         ILHeight -= (labFont.getSize() / 2);
                     } else {
                         // Shift drawing down if top label.
-                        if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0) {
+                        if (getLabelPosition() == Labels.LabelPositions.TOP) {
                             topLabelAdjustment = getLabelFont().getSize();
                         }
 
@@ -911,7 +911,7 @@ public class Barcode {
 
                 if (isIncludeLabel()) {
                     // Shift drawing down if top label.
-                    if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0)
+                    if (getLabelPosition() == Labels.LabelPositions.TOP)
                         topLabelAdjustment = getLabelFont().getSize();
 
                     ILHeight -= getLabelFont().getSize();
