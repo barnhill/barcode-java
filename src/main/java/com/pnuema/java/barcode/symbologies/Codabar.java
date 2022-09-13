@@ -36,7 +36,7 @@ public class Codabar extends BarcodeCommon {
 
         //check the ending char to make sure its a start/stop char
         switch (String.valueOf(getRawData().charAt(getRawData().trim().length() - 1)).trim().toUpperCase()) {
-        case "A":
+            case "A":
             case "B":
             case "C":
             case "D":
