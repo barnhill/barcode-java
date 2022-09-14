@@ -10,7 +10,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.List;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
