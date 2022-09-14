@@ -10,7 +10,7 @@ import static com.pnuema.java.barcode.utils.CharUtils.getChar;
 /**
  * Code 39 encoding
  */
-public class Code39 extends BarcodeCommon implements IBarcode {
+public class Code39 extends BarcodeCommon {
     private final HashMap<Character, String> C39_Code = new HashMap<>(); //is initialized by init_Code39()
     private final HashMap<String, String> ExtC39_Translation = new HashMap<>();
     private boolean _AllowExtended = false;

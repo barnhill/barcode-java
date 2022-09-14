@@ -20,7 +20,6 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 @SuppressWarnings("WeakerAccess")
 public class Barcode {
-    public enum TYPE {UNSPECIFIED, UPCA, UPCE, UPC_SUPPLEMENTAL_2DIGIT, UPC_SUPPLEMENTAL_5DIGIT, EAN13, EAN8, Interleaved2of5, Interleaved2of5_Mod10, Standard2of5, Standard2of5_Mod10, Industrial2of5, Industrial2of5_Mod10, CODE39, CODE39Extended, CODE39_Mod43, Codabar, PostNet, BOOKLAND, ISBN, JAN13, MSI_Mod10, MSI_2Mod10, MSI_Mod11, MSI_Mod11_Mod10, Modified_Plessey, CODE11, USD8, UCC12, UCC13, LOGMARS, CODE128, CODE128A, CODE128B, CODE128C, ITF14, CODE93, TELEPEN, FIM, PHARMACODE}
 
     public enum SaveTypes {JPG, BMP, PNG, GIF, TIFF, UNSPECIFIED}
 
@@ -30,8 +29,7 @@ public class Barcode {
     private String rawData = "";
     private String encodedValue = "";
     private String countryAssigningManufacturerCode = "N/A";
-    private TYPE encodedType = TYPE.UNSPECIFIED;
-    private Image encodedImage = null;
+    private EncodingType encodedType = EncodingType.UNSPECIFIED;
     private Color foreColor = Color.BLACK;
     private Color backColor = Color.WHITE;
     private int width = 300;
@@ -72,7 +70,7 @@ public class Barcode {
      * @param data  String to be encoded
      * @param iType Type to encode
      */
-    public Barcode(String data, TYPE iType) {
+    public Barcode(String data, EncodingType iType) {
         this(data);
         encodedType = iType;
     }
@@ -134,7 +132,7 @@ public class Barcode {
      *
      * @return encoded type
      */
-    public TYPE getEncodedType() {
+    public EncodingType getEncodedType() {
         return encodedType;
     }
 
@@ -143,17 +141,8 @@ public class Barcode {
      *
      * @param encoded_Type encoded type
      */
-    public void setEncodedType(TYPE encoded_Type) {
+    public void setEncodedType(EncodingType encoded_Type) {
         encodedType = encoded_Type;
-    }
-
-    /**
-     * Gets the Image of the generated barcode
-     *
-     * @return Encoded image
-     */
-    public Image getEncodedImage() {
-        return encodedImage;
     }
 
     /**
@@ -422,45 +411,6 @@ public class Barcode {
     }
 
     /**
-     * Represents the size of an image in real world coordinates (millimeters or inches).
-     */
-    public class ImageSize {
-        public ImageSize(double width, double height, boolean metric) {
-            setWidth(width);
-            setHeight(height);
-            setMetric(metric);
-        }
-
-        public double getWidth() {
-            return width;
-        }
-
-        public void setWidth(double width) {
-            this.width = width;
-        }
-
-        public double getHeight() {
-            return height;
-        }
-
-        public void setHeight(double height) {
-            this.height = height;
-        }
-
-        public boolean isMetric() {
-            return metric;
-        }
-
-        public void setMetric(boolean metric) {
-            this.metric = metric;
-        }
-
-        private double width;
-        private double height;
-        private boolean metric;
-    }
-
-    /**
      * Encodes the raw data into binary form representing bars and spaces.  Also generates an Image of the barcode.
      *
      * @param iType          Type of encoding to use
@@ -469,7 +419,7 @@ public class Barcode {
      * @param height         Height of the resulting barcode.(pixels)
      * @return Image representing the barcode
      */
-    public Image encode(TYPE iType, String stringToEncode, int width, int height) {
+    public Image encode(EncodingType iType, String stringToEncode, int width, int height) {
         setWidth(width);
         setHeight(height);
         return encode(iType, stringToEncode);
@@ -486,7 +436,7 @@ public class Barcode {
      * @param height         Height of the resulting barcode (pixels)
      * @return Image representing the barcode
      */
-    public Image encode(TYPE iType, String stringToEncode, Color foreColor, Color backColor, int width, int height) {
+    public Image encode(EncodingType iType, String stringToEncode, Color foreColor, Color backColor, int width, int height) {
         setWidth(width);
         setHeight(height);
         return encode(iType, stringToEncode, foreColor, backColor);
@@ -501,7 +451,7 @@ public class Barcode {
      * @param backColor      Background color
      * @return Image representing the barcode
      */
-    public Image encode(TYPE iType, String stringToEncode, Color foreColor, Color backColor) {
+    public Image encode(EncodingType iType, String stringToEncode, Color foreColor, Color backColor) {
         setBackColor(backColor);
         setForeColor(foreColor);
         return encode(iType, stringToEncode);
@@ -514,7 +464,7 @@ public class Barcode {
      * @param stringToEncode Raw data to encode
      * @return Image representing the barcode
      */
-    public Image encode(TYPE iType, String stringToEncode) {
+    public Image encode(EncodingType iType, String stringToEncode) {
         rawData = stringToEncode;
         return encode(iType);
     }
@@ -525,7 +475,7 @@ public class Barcode {
      * @param iType Type of encoding to use
      * @return Image representation of the encoded value
      */
-    private Image encode(TYPE iType) {
+    private Image encode(EncodingType iType) {
         encodedType = iType;
         return encode();
     }
@@ -543,7 +493,7 @@ public class Barcode {
             throw new IllegalArgumentException("EENCODE-1: Input data not allowed to be blank.");
         }
 
-        if (getEncodedType() == TYPE.UNSPECIFIED) {
+        if (getEncodedType() == EncodingType.UNSPECIFIED) {
             throw new IllegalArgumentException("EENCODE-2: Symbology type not allowed to be unspecified.");
         }
 
@@ -652,11 +602,11 @@ public class Barcode {
         encodedValue = ibarcode.getEncodedValue();
         rawData = ibarcode.getRawData();
 
-        encodedImage = generateImage();
+        Image image = generateImage();
 
         setEncodingTime(System.currentTimeMillis() - dtStartTime);
 
-        return encodedImage;
+        return image;
     }
 
     /**
@@ -775,7 +725,7 @@ public class Barcode {
                         iBarWidth = getWidth() / encodedValue.length();
                     } else {
                         // Shift drawing down if top label
-                        if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0)
+                        if (getLabelPosition() == Labels.LabelPositions.TOP)
                             topLabelAdjustment = getLabelFont().getSize();
 
                         ILHeight -= getLabelFont().getSize();
@@ -850,7 +800,7 @@ public class Barcode {
                         ILHeight -= (labFont.getSize() / 2);
                     } else {
                         // Shift drawing down if top label.
-                        if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0) {
+                        if (getLabelPosition() == Labels.LabelPositions.TOP) {
                             topLabelAdjustment = getLabelFont().getSize();
                         }
 
@@ -911,7 +861,7 @@ public class Barcode {
 
                 if (isIncludeLabel()) {
                     // Shift drawing down if top label.
-                    if ((getLabelPosition().ordinal() & Labels.LabelPositions.TOP.ordinal()) > 0)
+                    if (getLabelPosition() == Labels.LabelPositions.TOP)
                         topLabelAdjustment = getLabelFont().getSize();
 
                     ILHeight -= getLabelFont().getSize();
@@ -942,7 +892,7 @@ public class Barcode {
                     g.setColor(getForeColor());
 
                     while (pos < getEncodedValue().length()) {
-                        if (getEncodedType() == TYPE.PostNet) {
+                        if (getEncodedType() == EncodingType.PostNet) {
                             //draw half bars in postnet
                             if (getEncodedValue().charAt(pos) == '0') {
                                 g.fillRect(pos * iBarWidth + shiftAdjustment, (ILHeight / 2) + topLabelAdjustment, iBarWidth / 2, (ILHeight / 2) + topLabelAdjustment);
@@ -968,8 +918,6 @@ public class Barcode {
             }
         }
 
-        encodedImage = bitmap;
-
         setDrawTime(System.currentTimeMillis() - dtStartTime);
 
         return bitmap;
@@ -984,7 +932,7 @@ public class Barcode {
         byte[] imageData = null;
 
         try {
-            if (encodedImage != null) {
+            if (encode() != null) {
                 //Save the image to a memory stream so that we can get a byte array!
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 saveImage(stream, savetype);
@@ -1006,9 +954,10 @@ public class Barcode {
      */
     public void saveImage(String filename, SaveTypes fileType) throws IOException {
         try {
-            if (getEncodedImage() != null) {
+            Image encodedImage = encode();
+            if (encodedImage != null) {
                 String imageformat = getImageFormatFromFileType(fileType);
-                ImageIO.write((RenderedImage) getEncodedImage(), imageformat, new File(filename));
+                ImageIO.write((RenderedImage) encodedImage, imageformat, new File(filename));
             }
         } catch (IOException ex) {
             throw new IOException("ESAVEIMAGE-1: Could not save image.\n\n=======================\n\n" + ex.getMessage());
@@ -1024,9 +973,10 @@ public class Barcode {
      */
     public void saveImage(OutputStream stream, SaveTypes fileType) throws IOException {
         try {
-            if (getEncodedImage() != null) {
+            Image encodedImage = encode();
+            if (encodedImage != null) {
                 String imageformat = getImageFormatFromFileType(fileType);
-                ImageIO.write((RenderedImage) getEncodedImage(), imageformat, stream);
+                ImageIO.write((RenderedImage) encodedImage, imageformat, stream);
             }
         } catch (Exception ex) {
             throw new IOException("ESAVEIMAGE-2: Could not save image.\n\n=======================\n\n" + ex.getMessage());
@@ -1067,78 +1017,4 @@ public class Barcode {
         return shiftAdjustment;
     }
 
-    /**
-     * Encodes the raw data into binary form representing bars and spaces.  Also generates an Image of the barcode
-     *
-     * @param iType Type of encoding to use
-     * @param data  Raw data to encode
-     * @return Image representing the barcode
-     */
-    public static Image DoEncode(TYPE iType, String data) {
-        return new Barcode().encode(iType, data);
-    }
-
-    /**
-     * Encodes the raw data into binary form representing bars and spaces.  Also generates an Image of the barcode
-     *
-     * @param iType        Type of encoding to use
-     * @param data         Raw data to encode
-     * @param includeLabel Include the label at the bottom of the image with data encoded
-     * @return Image representing the barcode
-     */
-    public static Image DoEncode(TYPE iType, String data, boolean includeLabel) {
-        Barcode b = new Barcode();
-        b.setIncludeLabel(includeLabel);
-        return b.encode(iType, data);
-    }
-
-    /**
-     * Encodes the raw data into binary form representing bars and spaces.  Also generates an Image of the barcode
-     *
-     * @param iType        Type of encoding to use
-     * @param data         Raw data to encode
-     * @param includeLabel Include the label at the bottom of the image with data encoded
-     * @param width        Width of the resulting barcode
-     * @param height       Height of the resulting barcode
-     * @return Image representing the barcode
-     */
-    public static Image DoEncode(TYPE iType, String data, boolean includeLabel, int width, int height) {
-        Barcode b = new Barcode();
-        b.setIncludeLabel(includeLabel);
-        return b.encode(iType, data, width, height);
-    }
-
-    /**
-     * Encodes the raw data into binary form representing bars and spaces.  Also generates an Image of the barcode
-     *
-     * @param iType        Type of encoding to use
-     * @param data         Raw data to encode
-     * @param includeLabel Include the label at the bottom of the image with data encoded
-     * @param drawColor    Foreground color
-     * @param backColor    Background color
-     * @return Image representing the barcode
-     */
-    public static Image DoEncode(TYPE iType, String data, boolean includeLabel, Color drawColor, Color backColor) {
-        Barcode b = new Barcode();
-        b.setIncludeLabel(includeLabel);
-        return b.encode(iType, data, drawColor, backColor);
-    }
-
-    /**
-     * Encodes the raw data into binary form representing bars and spaces.  Also generates an Image of the barcode
-     *
-     * @param iType        Type of encoding to use
-     * @param data         Raw data to encode
-     * @param includeLabel Include the label at the bottom of the image with data encoded
-     * @param drawColor    Foreground color
-     * @param backColor    Background color
-     * @param width        Width of the resulting barcode
-     * @param height       Height of the resulting barcode
-     * @return Image representing the barcode
-     */
-    public static Image DoEncode(TYPE iType, String data, boolean includeLabel, Color drawColor, Color backColor, int width, int height) {
-        Barcode b = new Barcode();
-        b.setIncludeLabel(includeLabel);
-        return b.encode(iType, data, drawColor, backColor, width, height);
-    }
 }

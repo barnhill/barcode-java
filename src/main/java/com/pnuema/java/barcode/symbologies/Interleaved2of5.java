@@ -2,17 +2,18 @@ package com.pnuema.java.barcode.symbologies;
 
 import com.pnuema.java.barcode.Barcode;
 import com.pnuema.java.barcode.BarcodeCommon;
+import com.pnuema.java.barcode.EncodingType;
 import com.pnuema.java.barcode.IBarcode;
 import com.pnuema.java.barcode.utils.Utils2of5;
 
 /**
  * Interleaved 2 of 5 encoding
  */
-public class Interleaved2of5 extends BarcodeCommon implements IBarcode {
+public class Interleaved2of5 extends BarcodeCommon {
     private final String[] I25_Code = {"NNWWN", "WNNNW", "NWNNW", "WWNNN", "NNWNW", "WNWNN", "NWWNN", "NNNWW", "WNNWN", "NWNWN"};
-    private final Barcode.TYPE type;
+    private final EncodingType type;
 
-    public Interleaved2of5(String input, Barcode.TYPE encodingType) {
+    public Interleaved2of5(String input, EncodingType encodingType) {
         setRawData(input);
         type = encodingType;
     }
@@ -24,7 +25,7 @@ public class Interleaved2of5 extends BarcodeCommon implements IBarcode {
      */
     private String encodeInterleaved2Of5() {
         //check length of input
-        if (getRawData().length() % 2 != (type == Barcode.TYPE.Interleaved2of5_Mod10 ? 1 : 0))
+        if (getRawData().length() % 2 != (type == EncodingType.Interleaved2of5_Mod10 ? 1 : 0))
             error("EI25-1: Data length invalid.");
 
         //check numeric only
@@ -33,7 +34,7 @@ public class Interleaved2of5 extends BarcodeCommon implements IBarcode {
         }
 
         StringBuilder result = new StringBuilder("1010");
-        String data = getRawData() + (type == Barcode.TYPE.Interleaved2of5_Mod10 ? Utils2of5.CalculateMod10CheckDigit(getRawData()) : "");
+        String data = getRawData() + (type == EncodingType.Interleaved2of5_Mod10 ? Utils2of5.CalculateMod10CheckDigit(getRawData()) : "");
 
         for (int i = 0; i < data.length(); i += 2) {
             boolean bars = true;
