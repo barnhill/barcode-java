@@ -9,7 +9,7 @@ wrapper {
 }
 
 group 'com.pnuema.java'
-version '1.12'
+version '1.13'
 
 buildscript {
     repositories {

@@ -42,8 +42,8 @@ public class Barcode {
     private String alternateLabel;
     private boolean includeLabel;
     private boolean standardizeLabel = true;
-    private long encodingTime;
-    private long drawTime;
+    private double encodingTime;
+    private double drawTime;
     private Integer barWidth;
     private Double aspectRatio;
 
@@ -312,7 +312,7 @@ public class Barcode {
      *
      * @return The number of milliseconds elapsed since encoding started
      */
-    public long getEncodingTime() {
+    public double getEncodingTime() {
         return encodingTime;
     }
 
@@ -321,7 +321,7 @@ public class Barcode {
      *
      * @param encodingTime The number of milliseconds elapsed since encoding started
      */
-    private void setEncodingTime(long encodingTime) {
+    private void setEncodingTime(double encodingTime) {
         this.encodingTime = encodingTime;
     }
 
@@ -330,7 +330,7 @@ public class Barcode {
      *
      * @return The number of milliseconds elapsed since encoding started
      */
-    public long getDrawTime() {
+    public double getDrawTime() {
         return drawTime;
     }
 
@@ -339,7 +339,7 @@ public class Barcode {
      *
      * @param drawTime The number of milliseconds elapsed since drawing started
      */
-    private void setDrawTime(long drawTime) {
+    private void setDrawTime(double drawTime) {
         this.drawTime = drawTime;
     }
 
@@ -486,7 +486,7 @@ public class Barcode {
      * @return Image representation of the encoded value
      */
     private Image encode() {
-        long dtStartTime = System.currentTimeMillis();
+        long dtStartTime = System.nanoTime();
 
         //make sure there is something to encode
         if (rawData.trim().isEmpty()) {
@@ -604,7 +604,7 @@ public class Barcode {
 
         Image image = generateImage();
 
-        setEncodingTime(System.currentTimeMillis() - dtStartTime);
+        setEncodingTime((System.nanoTime() - dtStartTime) / 1000000.0);
 
         return image;
     }
@@ -621,7 +621,7 @@ public class Barcode {
         }
 
         BufferedImage bitmap;
-        long dtStartTime = System.currentTimeMillis();
+        long dtStartTime = System.nanoTime();
 
         switch (this.encodedType) {
             case ITF14: {
@@ -918,7 +918,7 @@ public class Barcode {
             }
         }
 
-        setDrawTime(System.currentTimeMillis() - dtStartTime);
+        setDrawTime((System.nanoTime() - dtStartTime) / 1000000.0);
 
         return bitmap;
     }
