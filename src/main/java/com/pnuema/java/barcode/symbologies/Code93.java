@@ -1,7 +1,6 @@
 package com.pnuema.java.barcode.symbologies;
 
 import com.pnuema.java.barcode.BarcodeCommon;
-import com.pnuema.java.barcode.IBarcode;
 
 import java.util.ArrayList;
 import java.util.List;

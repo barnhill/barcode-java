@@ -1,9 +1,8 @@
 package com.pnuema.java.barcode.symbologies;
 
 import com.pnuema.java.barcode.BarcodeCommon;
-import com.pnuema.java.barcode.IBarcode;
 
-import java.util.*;
+import java.util.TreeMap;
 
 /**
  * EAN-13 encoding

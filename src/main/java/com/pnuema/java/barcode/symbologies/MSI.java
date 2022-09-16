@@ -1,9 +1,7 @@
 package com.pnuema.java.barcode.symbologies;
 
-import com.pnuema.java.barcode.Barcode;
 import com.pnuema.java.barcode.BarcodeCommon;
 import com.pnuema.java.barcode.EncodingType;
-import com.pnuema.java.barcode.IBarcode;
 
 /**
  * MSI encoding
