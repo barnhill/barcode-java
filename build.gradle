@@ -5,11 +5,11 @@ apply plugin: "com.vanniktech.maven.publish"
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "7.5.1"
+    gradleVersion = "8.0.2"
 }
 
 group 'com.pnuema.java'
-version '1.13'
+version '1.14'
 
 buildscript {
     repositories {
@@ -28,7 +28,7 @@ jar {
     }
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
