@@ -684,7 +684,8 @@ public class Barcode {
                 }
 
                 if (isIncludeLabel()) {
-                    Labels.Label_ITF14(this, bitmap);
+                    Labels.labelGeneric(this, bitmap);
+                    //Labels.Label_ITF14(this, bitmap);
                 }
 
                 break;
@@ -761,11 +762,12 @@ public class Barcode {
                 }
 
                 if (isIncludeLabel()) {
-                    if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
+                    Labels.labelGeneric(this, bitmap);
+                    /*if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
                         Labels.Label_UPCA(this, bitmap);
                     } else {
                         Labels.labelGeneric(this, bitmap);
-                    }
+                    }*/
                 }
 
                 break;
@@ -835,11 +837,12 @@ public class Barcode {
                 }
 
                 if (isIncludeLabel()) {
-                    if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
+                    Labels.labelGeneric(this, bitmap);
+                    /*if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
                         Labels.Label_EAN13(this, bitmap);
                     } else {
                         Labels.labelGeneric(this, bitmap);
-                    }
+                    }*/
                 }
 
                 break;

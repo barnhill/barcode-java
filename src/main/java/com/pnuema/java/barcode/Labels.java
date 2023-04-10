@@ -79,7 +79,7 @@ class Labels {
 
             //color a background color box at the bottom of the barcode to hold the string of data
             g.setColor(Barcode.getBackColor());
-            g.drawRect(0, LabelY, img.getWidth(), font.getSize());
+            g.fillRect(0, LabelY, img.getWidth(), font.getSize());
 
             //draw datastring under the barcode image
             g.setColor(Barcode.getForeColor());
