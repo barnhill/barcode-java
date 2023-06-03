@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 apply plugin: 'java'
 apply plugin: 'signing'
 apply plugin: 'maven-publish'
@@ -5,18 +7,18 @@ apply plugin: "com.vanniktech.maven.publish"
 
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "8.0.2"
+    gradleVersion = "8.1.1"
 }
 
 group 'com.pnuema.java'
-version '1.15'
+version VERSION_NAME
 
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.19.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.25.2'
     }
 }
 
@@ -28,7 +30,7 @@ jar {
     }
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
@@ -38,12 +40,14 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
+tasks.register('sourcesJar', Jar) {
+    dependsOn classes
     archiveClassifier.set("sources")
     from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
     archiveClassifier.set("javadoc")
     from javadoc.destinationDir
 }
@@ -51,10 +55,4 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives jar, sourcesJar, javadocJar
 }
-
-signing {
-    useGpgCmd()
-    sign configurations.archives
-}
-
 

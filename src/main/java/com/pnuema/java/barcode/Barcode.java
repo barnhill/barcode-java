@@ -17,7 +17,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 /**
  * Generates a barcode image of a specified symbology from a string of data.
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Barcode {
 
     public enum SaveTypes {JPG, BMP, PNG, GIF, TIFF, UNSPECIFIED}
@@ -368,11 +368,11 @@ public class Barcode {
 
     /**
      * If non-null, Height is ignored and set to Width divided by this value rounded down.
-     *
+     * <p>
      * Note: As longer barcodes may be more difficult to align a scanner gun with,
      * growing the height based on the width automatically allows the gun to be rotated the
      * same amount regardless of how wide the barcode is. A recommended value is 2.
-     *
+     * <p>
      * This value is applied to Height after Width has been
      * calculated. So it is safe to use in conjunction with {@link Barcode#setBarWidth(Integer)}
      *
