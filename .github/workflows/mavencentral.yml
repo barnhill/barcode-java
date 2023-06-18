@@ -34,3 +34,6 @@ jobs:
       env:
         ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
         ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
+        REMOTE_CACHE_URL: ${{ secrets.REMOTE_CACHE_URL }}
+        REMOTE_CACHE_USER: ${{ secrets.REMOTE_CACHE_USER }}
+        REMOTE_CACHE_PASS: ${{ secrets.REMOTE_CACHE_PASS }}
