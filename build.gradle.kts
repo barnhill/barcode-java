@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    extra["gradleVersion"] = "8.2.1"
+    extra["gradle"] = "8.2.1"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
-val gradleVersion: String by extra
+val gradle: String by extra
 val javaVersion: JavaVersion by extra
 
 plugins {
@@ -30,7 +30,7 @@ dependencies {
 val dokkaOutputDir = buildDir.resolve("docs")
 tasks {
     wrapper {
-        gradleVersion = gradleVersion
+        gradleVersion = gradle
         distributionType = Wrapper.DistributionType.BIN
     }
     jar {
