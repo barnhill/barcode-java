@@ -1,23 +1,31 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     extra["gradleVersion"] = "8.2.1"
+    extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
 val gradleVersion: String by extra
+val javaVersion: JavaVersion by extra
 
 plugins {
     id("java")
     id("signing")
-    id("maven-publish")
-    id("com.vanniktech.maven.publish") version "0.25.3"
-    id("org.jetbrains.dokka") version "1.8.20"
+
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.gradle.cachefix).apply(false)
 }
 
 group = "com.pnuema.java"
 version = project.properties["VERSION_NAME"].toString()
 
-/*dependencies {
-    testImplementation group: "junit", name: "junit", version: "4.13.2"
-}*/
+dependencies {
+    implementation(libs.dokka.gradle)
+    implementation(libs.kotlin.gradle)
+    testImplementation(libs.junit)
+}
 
 val dokkaOutputDir = buildDir.resolve("docs")
 tasks {
@@ -39,8 +47,7 @@ tasks {
     }
 
     val javadocJar by creating(Jar::class) {
-        dependsOn.add(javadoc)
-        dependsOn.add(dokkaJavadoc)
+        dependsOn.add(dokkaHtml)
         archiveClassifier.set("javadoc")
         from(dokkaOutputDir)
     }
@@ -50,19 +57,34 @@ tasks {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
         withSourcesJar()
         withJavadocJar()
+    }
+
+    dokkaHtml {
+        outputDirectory.set(file(dokkaOutputDir))
+        dokkaSourceSets {
+            named("main")
+        }
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = javaVersion.toString()
+        }
+    }
+
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = javaVersion.toString()
+        }
     }
 
     artifacts {
         archives(jar)
         archives(sourcesJar)
         archives(javadocJar)
-    }
-
-    build {
-        dependsOn(javadocJar)
     }
 }
