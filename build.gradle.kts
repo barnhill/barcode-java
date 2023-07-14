@@ -87,4 +87,10 @@ tasks {
         archives(sourcesJar)
         archives(javadocJar)
     }
+
+    afterEvaluate {
+        tasks.named("generateMetadataFileForMavenPublication") {
+            dependsOn.add(tasks.named("dokkaJavadocJar"))
+        }
+    }
 }
