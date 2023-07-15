@@ -34,6 +34,7 @@ tasks {
         distributionType = Wrapper.DistributionType.BIN
     }
     jar {
+        archiveClassifier.set("jar")
         manifest {
             attributes["Implementation-Title"] = "Barcode for Java"
             attributes["Implementation-Version"] = archiveVersion
@@ -83,9 +84,9 @@ tasks {
     }
 
     artifacts {
-        add("archives", jar)
-        add("archives", sourcesJar)
-        add("archives", javadocJar)
+        archives(jar)
+        archives(sourcesJar)
+        archives(javadocJar)
     }
 
     afterEvaluate {
