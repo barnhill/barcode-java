@@ -83,9 +83,9 @@ tasks {
     }
 
     artifacts {
-        archives(jar)
-        archives(sourcesJar)
-        archives(javadocJar)
+        add("archives", jar)
+        add("archives", sourcesJar)
+        add("archives", javadocJar)
     }
 
     afterEvaluate {
