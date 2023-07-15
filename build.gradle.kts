@@ -60,8 +60,6 @@ tasks {
     java {
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
-        withSourcesJar()
-        withJavadocJar()
     }
 
     dokkaHtml {
