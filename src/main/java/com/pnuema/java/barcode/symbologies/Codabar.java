@@ -99,8 +99,8 @@ public class Codabar extends BarcodeCommon {
         codabarCode.put('.', "1101101101");
         codabarCode.put('+', "1011011011");
         codabarCode.put('A', "1011001001");
-        codabarCode.put('B', "1010010011");
-        codabarCode.put('C', "1001001011");
+        codabarCode.put('B', "1001001011");
+        codabarCode.put('C', "1010010011");
         codabarCode.put('D', "1010011001");
         codabarCode.put('a', "1011001001");
         codabarCode.put('b', "1010010011");
