@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    extra["gradle"] = "8.2.1"
+    extra["gradle"] = "8.3"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
