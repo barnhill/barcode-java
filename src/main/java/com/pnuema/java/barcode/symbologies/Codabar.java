@@ -82,30 +82,30 @@ public class Codabar extends BarcodeCommon {
 
     private void initCodabar() {
         codabarCode.clear();
-        codabarCode.put('0', "101010011");//"101001101101");
-        codabarCode.put('1', "101011001");//"110100101011");
-        codabarCode.put('2', "101001011");//"101100101011");
-        codabarCode.put('3', "110010101");//"110110010101");
-        codabarCode.put('4', "101101001");//"101001101011");
-        codabarCode.put('5', "110101001");//"110100110101");
-        codabarCode.put('6', "100101011");//"101100110101");
-        codabarCode.put('7', "100101101");//"101001011011");
-        codabarCode.put('8', "100110101");//"110100101101");
-        codabarCode.put('9', "110100101");//"101100101101");
-        codabarCode.put('-', "101001101");//"110101001011");
-        codabarCode.put('$', "101100101");//"101101001011");
-        codabarCode.put(':', "1101011011");//"110110100101");
-        codabarCode.put('/', "1101101011");//"101011001011");
-        codabarCode.put('.', "1101101101");//"110101100101");
-        codabarCode.put('+', "101100110011");//"101101100101");
-        codabarCode.put('A', "1011001001");//"110110100101");
-        codabarCode.put('B', "1010010011");//"101011001011");
-        codabarCode.put('C', "1001001011");//"110101100101");
-        codabarCode.put('D', "1010011001");//"101101100101");
-        codabarCode.put('a', "1011001001");//"110110100101");
-        codabarCode.put('b', "1010010011");//"101011001011");
-        codabarCode.put('c', "1001001011");//"110101100101");
-        codabarCode.put('d', "1010011001");//"101101100101");
+        codabarCode.put('0', "101010011");
+        codabarCode.put('1', "101011001");
+        codabarCode.put('2', "101001011");
+        codabarCode.put('3', "110010101");
+        codabarCode.put('4', "101101001");
+        codabarCode.put('5', "110101001");
+        codabarCode.put('6', "100101011");
+        codabarCode.put('7', "100101101");
+        codabarCode.put('8', "100110101");
+        codabarCode.put('9', "110100101");
+        codabarCode.put('-', "101001101");
+        codabarCode.put('$', "101100101");
+        codabarCode.put(':', "1101011011");
+        codabarCode.put('/', "1101101011");
+        codabarCode.put('.', "1101101101");
+        codabarCode.put('+', "1011011011");
+        codabarCode.put('A', "1011001001");
+        codabarCode.put('B', "1010010011");
+        codabarCode.put('C', "1001001011");
+        codabarCode.put('D', "1010011001");
+        codabarCode.put('a', "1011001001");
+        codabarCode.put('b', "1010010011");
+        codabarCode.put('c', "1001001011");
+        codabarCode.put('d', "1010011001");
     }
 
     @Override
