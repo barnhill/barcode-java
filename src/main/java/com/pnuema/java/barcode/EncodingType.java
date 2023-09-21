@@ -1,5 +1,8 @@
 package com.pnuema.java.barcode;
 
+/**
+ * Barcode symbologies
+ */
 public enum EncodingType {
     UNSPECIFIED,
     UPCA,
