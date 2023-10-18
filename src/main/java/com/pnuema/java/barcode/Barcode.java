@@ -897,7 +897,7 @@ public class Barcode {
                         if (getEncodedType() == EncodingType.PostNet) {
                             //draw half bars in postnet
                             if (getEncodedValue().charAt(pos) == '0') {
-                                g.fillRect(pos * iBarWidth + shiftAdjustment, (ILHeight / 2) + topLabelAdjustment, iBarWidth / 2, (ILHeight / 2) + topLabelAdjustment);
+                                g.fillRect(pos * iBarWidth + shiftAdjustment, (int) (ILHeight - ILHeight * 0.4f) + topLabelAdjustment, iBarWidth / 2, (int) (ILHeight - ILHeight * 0.4f) + topLabelAdjustment);
                             } else {
                                 g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth / 2, ILHeight + topLabelAdjustment);
                             }

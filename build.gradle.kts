@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    extra["gradle"] = "8.3"
+    extra["gradle"] = "8.4"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
@@ -27,7 +27,7 @@ dependencies {
     testImplementation(libs.junit)
 }
 
-val dokkaOutputDir = buildDir.resolve("docs")
+val dokkaOutputDir = layout.buildDirectory.asFile.get().resolve("docs")
 tasks {
     wrapper {
         gradleVersion = gradle
