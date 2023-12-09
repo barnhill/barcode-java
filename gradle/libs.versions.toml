@@ -1,9 +1,9 @@
 [versions]
 vanniktech-maven-publish = "0.25.3"
 junit = "4.13.2"
-kotlin= "1.9.0"
+kotlin= "1.9.21"
 tomlChecker = "0.47.0"
-gradleCacheFix = "2.7.1"
+gradleCacheFix = "3.0"
 dokka = "1.8.20"
 
 [libraries]
