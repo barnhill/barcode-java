@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     extra["gradle"] = "8.6"
-    extra["javaVersion"] = JavaVersion.VERSION_17
+    extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
 val gradle: String by extra
