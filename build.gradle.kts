@@ -32,7 +32,6 @@ tasks {
         distributionType = Wrapper.DistributionType.BIN
     }
     jar {
-        archiveClassifier.set("jar")
         manifest {
             attributes["Implementation-Title"] = "Barcode for Java"
             attributes["Implementation-Version"] = archiveVersion
