@@ -10,7 +10,6 @@ plugins {
     id("java")
     id("signing")
 
-    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.dokka)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.gradle.cachefix).apply(false)
@@ -21,7 +20,6 @@ version = project.properties["VERSION_NAME"].toString()
 
 dependencies {
     implementation(libs.dokka.gradle)
-    implementation(libs.kotlin.gradle)
     testImplementation(libs.junit)
 }
 
@@ -61,21 +59,6 @@ tasks {
 
     dokkaHtml {
         outputDirectory.set(file(dokkaOutputDir))
-        dokkaSourceSets {
-            named("main")
-        }
-    }
-
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = javaVersion.toString()
-        }
-    }
-
-    compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = javaVersion.toString()
-        }
     }
 
     artifacts {
@@ -87,7 +70,7 @@ tasks {
     afterEvaluate {
         tasks.named("generateMetadataFileForMavenPublication") {
             dependsOn.add(tasks.named("dokkaJavadocJar"))
-            dependsOn.add(tasks.named("kotlinSourcesJar"))
+            dependsOn.add(tasks.named("sourcesJar"))
         }
     }
 }
