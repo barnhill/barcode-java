@@ -96,7 +96,7 @@ public class UPCE extends BarcodeCommon {
 
         int numericProductCode = Integer.parseInt(productCode);
 
-        if (manufacturer.endsWith("000") || manufacturer.endsWith("100") || manufacturer.endsWith("200") && numericProductCode <= 999) {
+        if ((manufacturer.endsWith("000") || manufacturer.endsWith("100") || manufacturer.endsWith("200")) && numericProductCode <= 999) {
             //rule 1
             UPCECode += manufacturer.substring(0, 2); //first two of manufacturer
             UPCECode += productCode.substring(2, 5); //last three of product
