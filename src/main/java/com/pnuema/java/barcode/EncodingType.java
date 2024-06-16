@@ -15,6 +15,7 @@ public enum EncodingType {
     Interleaved2of5_Mod10,
     Standard2of5,
     Standard2of5_Mod10,
+    IATA2of5,
     Industrial2of5,
     Industrial2of5_Mod10,
     CODE39,

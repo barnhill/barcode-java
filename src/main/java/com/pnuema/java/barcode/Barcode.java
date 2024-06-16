@@ -10,6 +10,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
@@ -509,6 +511,9 @@ public class Barcode {
             case Standard2of5_Mod10:
             case Standard2of5:
                 ibarcode = new Standard2of5(rawData, getEncodedType());
+                break;
+            case IATA2of5:
+                ibarcode = new IATA2of5(rawData);
                 break;
             case Interleaved2of5_Mod10:
             case Interleaved2of5:
