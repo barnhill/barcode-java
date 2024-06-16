@@ -48,6 +48,10 @@ public class UPCSupplement5 extends BarcodeCommon {
 
         String pattern = UPC_SUPP_5[cs];
 
+        return doEncoding(pattern);
+    }
+
+    private String doEncoding(String pattern) {
         StringBuilder result = new StringBuilder();
 
         int pos = 0;

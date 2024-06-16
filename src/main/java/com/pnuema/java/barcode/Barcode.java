@@ -10,16 +10,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
-
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 /**
  * Generates a barcode image of a specified symbology from a string of data.
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "DuplicatedCode"})
 public class Barcode {
 
     public enum SaveTypes {JPG, BMP, PNG, GIF, TIFF, UNSPECIFIED}
@@ -129,7 +126,7 @@ public class Barcode {
     }
 
     /**
-     * Gets the Encoded Type (ex. UPC-A, EAN-13 ... etc)
+     * Gets the Encoded Type (ex. UPC-A, EAN-13 ... etc.)
      *
      * @return encoded type
      */
@@ -138,7 +135,7 @@ public class Barcode {
     }
 
     /**
-     * Sets the Encoded Type (ex. UPC-A, EAN-13 ... etc)
+     * Sets the Encoded Type (ex. UPC-A, EAN-13 ... etc.)
      *
      * @param encoded_Type encoded type
      */
@@ -709,11 +706,10 @@ public class Barcode {
                 int ILHeight = getHeight();
                 int topLabelAdjustment = 0;
 
-                int shiftAdjustment = 0;
                 int iBarWidth = getWidth() / encodedValue.length();
 
                 //set alignment
-                shiftAdjustment = getShiftAdjustment();
+                int shiftAdjustment = getShiftAdjustment();
 
                 if (isIncludeLabel()) {
                     if ((getAlternateLabel() == null || getRawData().startsWith(getAlternateLabel())) && isStandardizeLabel()) {
@@ -754,7 +750,7 @@ public class Barcode {
 
                     g.setColor(getForeColor());
 
-                    //lines are fBarWidth wide so draw the appropriate color line vertically]
+                    //lines are fBarWidth wide so draw the appropriate color line vertically
                     while (pos < getEncodedValue().length()) {
                         if (getEncodedValue().charAt(pos) == '1') {
                             g.fillRect(pos * iBarWidth + shiftAdjustment, topLabelAdjustment, iBarWidth, ILHeight + topLabelAdjustment);

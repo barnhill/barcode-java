@@ -31,7 +31,7 @@ public class EAN13 extends BarcodeCommon {
     }
 
     /**
-     * Encode the raw data using the EAN-13 algorithm. (Can include the checksum already.  If it doesnt exist in the data then it will calculate it for you.  Accepted data lengths are 12 + 1 checksum or just the 12 data digits)
+     * Encode the raw data using the EAN-13 algorithm. (Can include the checksum already.  If it doesn't exist in the data then it will calculate it for you.  Accepted data lengths are 12 + 1 checksum or just the 12 data digits)
      * @return Encoded value
      */
     private String encodeEAN13()

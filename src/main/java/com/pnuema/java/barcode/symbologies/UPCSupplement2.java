@@ -36,6 +36,10 @@ public class UPCSupplement2 extends BarcodeCommon {
             error("EUPC-SUP2-3: Invalid Data. (Numeric only)");
         }
 
+        return doEncoding(pattern);
+    }
+
+    private String doEncoding(String pattern) {
         StringBuilder result = new StringBuilder("1011");
 
         int pos = 0;

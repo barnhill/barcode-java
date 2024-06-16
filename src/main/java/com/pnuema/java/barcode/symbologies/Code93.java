@@ -137,34 +137,34 @@ public class Code93 extends BarcodeCommon {
         C93_Code.add(new Entry( "40", "/", "101101110" ));
         C93_Code.add(new Entry( "41", "+", "101110110" ));
         C93_Code.add(new Entry( "42", "%", "110101110" ));
-        C93_Code.add(new Entry( "43", "(", "100100110" ));//dont know what character actually goes here
-        C93_Code.add(new Entry( "44", ")", "111011010" ));//dont know what character actually goes here
-        C93_Code.add(new Entry( "45", "#", "111010110" ));//dont know what character actually goes here
-        C93_Code.add(new Entry( "46", "@", "100110010" ));//dont know what character actually goes here
+        C93_Code.add(new Entry( "43", "(", "100100110" ));//don't know what character actually goes here
+        C93_Code.add(new Entry( "44", ")", "111011010" ));//don't know what character actually goes here
+        C93_Code.add(new Entry( "45", "#", "111010110" ));//don't know what character actually goes here
+        C93_Code.add(new Entry( "46", "@", "100110010" ));//don't know what character actually goes here
         C93_Code.add(new Entry( "-",  "*", "101011110" ));
     }
 
     private String addCheckDigits(String input) {
         //populate the C weights
         int[] aryCWeights = new int[input.length()];
-        int curweight = 1;
+        int currentWeight = 1;
         for (int i = input.length() - 1; i >= 0; i--) {
-            if (curweight > 20) {
-                curweight = 1;
+            if (currentWeight > 20) {
+                currentWeight = 1;
             }
-            aryCWeights[i] = curweight;
-            curweight++;
+            aryCWeights[i] = currentWeight;
+            currentWeight++;
         }
 
         //populate the K weights
         int[] aryKWeights = new int[input.length() + 1];
-        curweight = 1;
+        currentWeight = 1;
         for (int i = input.length(); i >= 0; i--) {
-            if (curweight > 15) {
-                curweight = 1;
+            if (currentWeight > 15) {
+                currentWeight = 1;
             }
-            aryKWeights[i] = curweight;
-            curweight++;
+            aryKWeights[i] = currentWeight;
+            currentWeight++;
         }
 
         //calculate C checksum

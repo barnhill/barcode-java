@@ -38,8 +38,8 @@ public class ITF14 extends BarcodeCommon {
             StringBuilder patternmixed = new StringBuilder();
 
             //interleave
-            while (patternbars.length() > 0) {
-                patternmixed.append(String.valueOf(patternbars.toCharArray()[0])).append(String.valueOf(patternspaces.toCharArray()[0]));
+            while (!patternbars.isEmpty()) {
+                patternmixed.append(patternbars.toCharArray()[0]).append(patternspaces.toCharArray()[0]);
                 patternbars = patternbars.substring(1);
                 patternspaces = patternspaces.substring(1);
             }

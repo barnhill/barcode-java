@@ -34,7 +34,7 @@ public class ISBN extends BarcodeCommon {
             setRawData(getRawData().substring(0, 12));
         }
 
-        //check to see if its an unknown type
+        //check to see if it is an unknown type
         if (type == null) {
             error("EBOOKLANDISBN-2: Invalid input.  Must start with 978 and be length must be 9, 10, 12, 13 characters.");
         }

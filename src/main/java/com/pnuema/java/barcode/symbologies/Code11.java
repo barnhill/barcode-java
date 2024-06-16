@@ -68,10 +68,14 @@ public class Code11 extends BarcodeCommon {
         }
 
         //encode data
+        return doEncoding(dataToEncodeWithChecksums);
+    }
+
+    private String doEncoding(String dataToEncodeWithChecksums) {
         String space = "0";
         StringBuilder builder = new StringBuilder();
         builder.append(C11_Code[11]);//start-stop char
-        builder.append(space); //interchar space
+        builder.append(space); //inter-character space
 
         for (char c : dataToEncodeWithChecksums.toCharArray()) {
             int index = (c == '-' ? 10 : Integer.parseInt(String.valueOf(c)));
@@ -83,7 +87,6 @@ public class Code11 extends BarcodeCommon {
 
         //stop bars
         builder.append(C11_Code[11]);
-
         return builder.toString();
     }
 

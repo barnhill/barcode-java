@@ -11,7 +11,7 @@ import static com.pnuema.java.barcode.utils.CharUtils.getChar;
  * Code 128 encoding
  */
 public class Code128 extends BarcodeCommon {
-    public enum TYPES { DYNAMIC, A, B, C };
+    public enum TYPES { DYNAMIC, A, B, C }
     private final List<Entry> C128_Code = new ArrayList<>();
     private final List<String> formattedData = new ArrayList<>();
     private Entry startCharacter = null;
@@ -77,7 +77,7 @@ public class Code128 extends BarcodeCommon {
     }
 
     private String encodeCode128() {
-        //initialize datastructure to hold encoding information
+        //initialize data structure to hold encoding information
         initCode128();
 
         return getEncoding();
@@ -350,7 +350,7 @@ public class Code128 extends BarcodeCommon {
         }
     }
 
-    private void insertStartandCodeCharacters() {
+    private void insertStartAndCodeCharacters() {
         Entry currentCodeSet;
         String currentCodeString;
 
@@ -379,7 +379,7 @@ public class Code128 extends BarcodeCommon {
                     CodeCharacter codeCharacter = findStartorCodeCharacter(formattedData.get(i));
                     List<Entry> tempStartChars = codeCharacter.rows;
 
-                    //check all the start characters and see if we need to stay with the same codeset or if a change of sets is required
+                    //check all the start characters and see if we need to stay with the same code set or if a change of sets is required
                     boolean sameCodeSet = false;
                     for (Entry row : tempStartChars) {
                         if (row.getA().endsWith(currentCodeString) || row.getB().endsWith(currentCodeString) || row.getC().endsWith(currentCodeString)) {
@@ -418,7 +418,7 @@ public class Code128 extends BarcodeCommon {
         breakUpDataForEncoding();
 
         //insert the start characters
-        insertStartandCodeCharacters();
+        insertStartAndCodeCharacters();
 
         StringBuilder encodedData = new StringBuilder();
         for (String s : formattedData) {

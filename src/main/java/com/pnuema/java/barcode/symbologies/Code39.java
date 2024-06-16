@@ -53,8 +53,8 @@ public class Code39 extends BarcodeCommon {
         this.init_Code39();
         this.init_ExtendedCode39();
 
-        String strNoAstr = getRawData().replace("*", "");
-        String strFormattedData = "*" + strNoAstr + (_EnableChecksum ? getChecksumChar(strNoAstr) : "") + "*";
+        String strNoAsterisk = getRawData().replace("*", "");
+        String strFormattedData = "*" + strNoAsterisk + (_EnableChecksum ? getChecksumChar(strNoAsterisk) : "") + "*";
 
         if (_AllowExtended) {
             InsertExtendedCharsIfNeeded(strFormattedData);
@@ -223,9 +223,9 @@ private void init_ExtendedCode39()
         ExtC39_Translation.put("z", "+Z");
         ExtC39_Translation.put(getChar(127), "%T"); //also %X, %Y, %Z
         }
-    private void InsertExtendedCharsIfNeeded(String FormattedData) {
+    private String InsertExtendedCharsIfNeeded(String formattedData) {
         StringBuilder output = new StringBuilder();
-        for (char c : FormattedData.toCharArray()) {
+        for (char c : formattedData.toCharArray()) {
             try {
                 String s = C39_Code.get(c);
                 output.append(c);
@@ -236,18 +236,18 @@ private void init_ExtendedCode39()
             }
         }
 
-        FormattedData = output.toString();
+       return output.toString();
     }
 
-    private char getChecksumChar(String strNoAstr) {
+    private char getChecksumChar(String strNoAsterisk) {
         //checksum
         String Code39_Charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%";
-        InsertExtendedCharsIfNeeded(strNoAstr);
+        String source = InsertExtendedCharsIfNeeded(strNoAsterisk);
         int sum = 0;
 
         //Calculate the checksum
-        for (int i = 0; i < strNoAstr.length(); ++i) {
-            sum = sum + Code39_Charset.indexOf(strNoAstr.toCharArray()[i]);
+        for (int i = 0; i < source.length(); ++i) {
+            sum = sum + Code39_Charset.indexOf(source.toCharArray()[i]);
         }
 
         //return the checksum char

@@ -145,6 +145,7 @@ public class UPCE extends BarcodeCommon {
         return UPCACode;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private String calculateCheckDigit(String upcA) {
         int cs = 0;
         try {

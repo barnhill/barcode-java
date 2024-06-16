@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 /**
  * Class to draw labels for differing barcode types
  */
+@SuppressWarnings("DuplicatedCode")
 class Labels {
     public enum LabelPositions {TOP, BOTTOM}
 
@@ -53,10 +54,9 @@ class Labels {
     /**
      * Draws Label for Generic barcodes
      * @param Barcode Barcode to draw the label for
-     * @param img Image representation of the barcode without the labels
-     * @return Image representation of the barcode with labels applied
+     * @param img Image representation of the barcode to which the label will be applied
      */
-    static Image labelGeneric(Barcode Barcode, BufferedImage img) {
+    static void labelGeneric(Barcode Barcode, BufferedImage img) {
         try {
             Font font = Barcode.getLabelFont();
 
@@ -87,7 +87,6 @@ class Labels {
             drawCenteredString(g, Barcode.getAlternateLabel() == null ? Barcode.getRawData() : Barcode.getAlternateLabel(), rect, font);
 
             g.dispose();
-            return img;
         } catch (Exception ex) {
             throw new RuntimeException("ELABEL_GENERIC-1: " + ex.getMessage());
         }
@@ -96,10 +95,9 @@ class Labels {
     /**
      * Draws Label for EAN-13 barcodes
      * @param Barcode Barcode to draw the label for
-     * @param img Image representation of the barcode without the labels
-     * @return Image representation of the barcode with labels applied
+     * @param img Image representation of the barcode to which the label will be applied
      */
-    static Image Label_EAN13(Barcode Barcode, BufferedImage img) {
+    static void Label_EAN13(Barcode Barcode, BufferedImage img) {
         try {
             int iBarWidth = Barcode.getWidth() / Barcode.getEncodedValue().length();
             String defTxt = Barcode.getRawData();
@@ -143,7 +141,6 @@ class Labels {
             g.drawString(defTxt.substring(7), s3 - iBarWidth, (float)LabelY);
 
             g.dispose();
-            return img;
         } catch (Exception ex) {
             throw new IllegalArgumentException("ELABEL_EAN13-1: " + ex.getMessage());
         }
@@ -152,10 +149,9 @@ class Labels {
     /**
      * Draws Label for UPC-A barcodes
      * @param Barcode Barcode to draw the label for
-     * @param img Image representation of the barcode without the labels
-     * @return Image representation of the barcode with labels applied
+     * @param img Image representation of the barcode to which the label will be applied
      */
-    public static Image Label_UPCA(Barcode Barcode, BufferedImage img) {
+    public static void Label_UPCA(Barcode Barcode, BufferedImage img) {
         try {
             int iBarWidth = Barcode.getWidth() / Barcode.getEncodedValue().length();
             int halfBarWidth = (int)(iBarWidth * 0.5);
@@ -202,7 +198,6 @@ class Labels {
             g.drawString(defTxt.substring(11), s4, img.getHeight() - smallFont.getSize());
 
             g.dispose();
-            return img;
         } catch (Exception ex) {
             throw new RuntimeException("ELABEL_UPCA-1: " + ex.getMessage());
         }
@@ -212,7 +207,7 @@ class Labels {
         //Returns the optimal font size for the specified dimensions
         int fontSize = 10;
 
-        if (lbl.length() > 0) {
+        if (!lbl.isEmpty()) {
             BufferedImage fakeImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //As we cannot use CreateGraphics() in a class library, so the fake image is used to load the Graphics.
 
             Graphics g = fakeImage.createGraphics();

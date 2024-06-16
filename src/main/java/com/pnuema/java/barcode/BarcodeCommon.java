@@ -7,6 +7,8 @@ public abstract class BarcodeCommon implements IBarcode {
     private String rawData = "";
     private final List<String> errors = new ArrayList<>();
 
+    public abstract String getEncodedValue() throws BarcodeException;
+
     protected void setRawData(String rawData) {
         this.rawData = rawData;
     }
@@ -24,7 +26,7 @@ public abstract class BarcodeCommon implements IBarcode {
         errors.clear();
     }
 
-    protected void error(String ErrorMessage) {
+    protected void error(String ErrorMessage) throws BarcodeException {
         errors.add(ErrorMessage);
         throw new BarcodeException(ErrorMessage);
     }

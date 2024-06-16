@@ -21,7 +21,7 @@ public class Codabar extends BarcodeCommon {
     private String encodeCodabar() {
         if (getRawData().length() < 2) error("ECODABAR-1: Data format invalid. (Invalid length)");
 
-        //check first char to make sure its a start/stop char
+        //check first char to make sure it is a start/stop char
         switch (String.valueOf(getRawData().charAt(0)).toUpperCase().trim()) {
             case "A":
             case "B":
@@ -33,7 +33,7 @@ public class Codabar extends BarcodeCommon {
                 break;
         }
 
-        //check the ending char to make sure its a start/stop char
+        //check the ending char to make sure it is a start/stop char
         switch (String.valueOf(getRawData().charAt(getRawData().trim().length() - 1)).trim().toUpperCase()) {
             case "A":
             case "B":

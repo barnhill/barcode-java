@@ -37,6 +37,10 @@ public class Postnet extends BarcodeCommon {
                 break;
         }
 
+        return doEncoding();
+    }
+
+    private String doEncoding() {
         //Note: 0 = half bar and 1 = full bar
         //initialize the result with the starting bar
         StringBuilder result = new StringBuilder("1");
@@ -56,7 +60,6 @@ public class Postnet extends BarcodeCommon {
 
         //ending bar
         result.append("1");
-
         return result.toString();
     }
 
