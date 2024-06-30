@@ -1,5 +1,5 @@
 buildscript {
-    extra["gradle"] = "8.7"
+    extra["gradle"] = "8.8"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 

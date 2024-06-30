@@ -27,7 +27,7 @@ public class Barcode {
     private String rawData = "";
     private String encodedValue = "";
     private String countryAssigningManufacturerCode = "N/A";
-    private EncodingType encodedType = EncodingType.UNSPECIFIED;
+    private EncodingType encodedType = null;
     private Color foreColor = Color.BLACK;
     private Color backColor = Color.WHITE;
     private int width = 300;
@@ -491,7 +491,7 @@ public class Barcode {
             throw new IllegalArgumentException("EENCODE-1: Input data not allowed to be blank.");
         }
 
-        if (getEncodedType() == EncodingType.UNSPECIFIED) {
+        if (getEncodedType() == null) {
             throw new IllegalArgumentException("EENCODE-2: Symbology type not allowed to be unspecified.");
         }
 

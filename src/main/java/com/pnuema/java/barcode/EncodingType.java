@@ -4,7 +4,6 @@ package com.pnuema.java.barcode;
  * Barcode symbologies
  */
 public enum EncodingType {
-    UNSPECIFIED,
     UPCA,
     UPCE,
     UPC_SUPPLEMENTAL_2DIGIT,
