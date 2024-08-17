@@ -1,5 +1,7 @@
+import org.jetbrains.dokka.plugability.configuration
+
 buildscript {
-    extra["gradle"] = "8.8"
+    extra["gradle"] = "8.10"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
@@ -43,6 +45,7 @@ tasks {
     }
 
     val javadocJar by creating(Jar::class) {
+        dependsOn.add(javadoc)
         dependsOn.add(dokkaHtml)
         archiveClassifier.set("javadoc")
         from(dokkaOutputDir)
@@ -69,7 +72,7 @@ tasks {
 
     afterEvaluate {
         tasks.named("generateMetadataFileForMavenPublication") {
-            dependsOn.add(tasks.named("dokkaJavadocJar"))
+            dependsOn.add(tasks.named("dokkaJavadoc"))
             dependsOn.add(tasks.named("sourcesJar"))
         }
     }
