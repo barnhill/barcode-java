@@ -33,10 +33,6 @@ val cacheUrl: String? = if (System.getenv("REMOTE_CACHE_URL") == null) remoteCac
 
 if (cacheUrl != null) {
     buildCache {
-        local {
-            removeUnusedEntriesAfterDays = 30
-        }
-
         remote<HttpBuildCache> {
             url = uri(cacheUrl)
             isEnabled = true
