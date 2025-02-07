@@ -1,7 +1,7 @@
 import org.jetbrains.dokka.plugability.configuration
 
 buildscript {
-    extra["gradle"] = "8.11.1"
+    extra["gradle"] = "8.12.1"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
