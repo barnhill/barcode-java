@@ -34,5 +34,5 @@ jobs:
         REMOTE_CACHE_PASS: ${{ secrets.REMOTE_CACHE_PASS }}
     - uses: actions/upload-artifact@v4
       with:
-        name: Package
+        name: Barcode Java ${{ matrix.java }}
         path: build/libs
