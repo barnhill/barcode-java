@@ -32,7 +32,7 @@ jobs:
         REMOTE_CACHE_URL: ${{ secrets.REMOTE_CACHE_URL }}
         REMOTE_CACHE_USER: ${{ secrets.REMOTE_CACHE_USER }}
         REMOTE_CACHE_PASS: ${{ secrets.REMOTE_CACHE_PASS }}
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: Package
         path: build/libs
