@@ -1,7 +1,5 @@
-import org.jetbrains.dokka.plugability.configuration
-
 buildscript {
-    extra["gradle"] = "8.12.1"
+    extra["gradle"] = "8.13"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
@@ -26,6 +24,26 @@ dependencies {
 }
 
 val dokkaOutputDir = layout.buildDirectory.asFile.get().resolve("docs")
+dokka {
+    moduleName.set(project.properties["POM_NAME"].toString())
+    dokkaSourceSets.javaMain {
+        sourceLink {
+            localDirectory.set(file("src/main/kotlin"))
+            remoteUrl(project.properties["POM_URL"].toString())
+        }
+        perPackageOption {
+            matchingRegex.set(".*utils.*") // will match all utils packages and sub-packages and skip javadoc for them
+            suppress.set(true)
+        }
+    }
+    pluginsConfiguration.html {
+        footerMessage.set("(c) " + project.properties["POM_DEVELOPER_NAME"].toString())
+    }
+    dokkaPublications.html {
+        outputDirectory.set(dokkaOutputDir)
+    }
+}
+
 tasks {
     wrapper {
         gradleVersion = gradle
@@ -35,21 +53,21 @@ tasks {
         manifest {
             attributes["Implementation-Title"] = "Barcode for Java"
             attributes["Implementation-Version"] = archiveVersion
-            attributes["Implementation-Vendor"] = "Brad Barnhill"
+            attributes["Implementation-Vendor"] = project.properties["POM_DEVELOPER_NAME"].toString()
         }
     }
 
-    val sourcesJar by creating(Jar::class) {
+    val sourcesJar by registering(Jar::class, fun Jar.() {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
-    }
+    })
 
-    val javadocJar by creating(Jar::class) {
+    val javadocJar by registering(Jar::class, fun Jar.() {
         dependsOn.add(javadoc)
-        dependsOn.add(dokkaHtml)
+        dependsOn.add(dokkaGenerate)
         archiveClassifier.set("javadoc")
         from(dokkaOutputDir)
-    }
+    })
 
     test {
         useJUnitPlatform()
@@ -60,10 +78,6 @@ tasks {
         targetCompatibility = javaVersion
     }
 
-    dokkaHtml {
-        outputDirectory.set(file(dokkaOutputDir))
-    }
-
     artifacts {
         archives(jar)
         archives(sourcesJar)
@@ -72,7 +86,7 @@ tasks {
 
     afterEvaluate {
         tasks.named("generateMetadataFileForMavenPublication") {
-            dependsOn.add(tasks.named("dokkaJavadoc"))
+            dependsOn.add(tasks.named("dokkaGenerate"))
             dependsOn.add(tasks.named("sourcesJar"))
         }
     }
