@@ -256,10 +256,11 @@ public class EAN13 extends BarcodeCommon {
             int odd = 0;
 
             for (int i = 0; i < rawDataHolder.length(); i++) {
+                int digit = Integer.parseInt(rawDataHolder.substring(i, i + 1));
                 if (i % 2 == 0) {
-                    odd += Integer.parseInt(rawDataHolder.substring(i, i + 1));
+                    odd += digit;
                 } else {
-                    even += Integer.parseInt(rawDataHolder.substring(i, i + 1)) * 3;
+                    even += digit * 3;
                 }
             }
 
@@ -270,7 +271,7 @@ public class EAN13 extends BarcodeCommon {
                 cs = 0;
             }
 
-            setRawData(rawDataHolder + String.valueOf(cs).toCharArray()[0]);
+            setRawData(rawDataHolder + String.valueOf(cs).charAt(0));
         } catch (Exception ex) {
             error("EEAN13-4: Error calculating check digit.");
         }

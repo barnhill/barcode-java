@@ -111,8 +111,9 @@ public class Telepen extends BarcodeCommon {
                 error("ETELEPEN-3: Numeric encoding attempted on odd number of characters");
             }
             for (int i = 0; i < input.length(); i += 2) {
-                output += (Telepen_Code.get(Character.forDigit(Integer.parseInt(input.substring(i, i + 2)) + 27, 10)));
-                iCheckSum += Integer.parseInt(input.substring(i, i + 2)) + 27;
+                var parsed = Integer.parseInt(input.substring(i, i + 2)) + 27;
+                output += (Telepen_Code.get(Character.forDigit(parsed, 10)));
+                iCheckSum += parsed;
             }
         } catch (Exception ex) {
             error("ETELEPEN-2: Numeric encoding failed");

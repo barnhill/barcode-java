@@ -75,7 +75,7 @@ public class ITF14 extends BarcodeCommon {
 
             for (int i = 0; i <= getRawData().length() - 1; i++) {
                 int temp = Integer.parseInt(getRawData().substring(i, i + 1));
-                total += temp * ((i == 0 || i % 2 == 0) ? 3 : 1);
+                total += temp * (i % 2 == 0 ? 3 : 1);
             }//for
 
             int cs = total % 10;
