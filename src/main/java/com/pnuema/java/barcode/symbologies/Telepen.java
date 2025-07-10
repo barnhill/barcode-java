@@ -5,17 +5,70 @@ import com.pnuema.java.barcode.BarcodeCommon;
 import java.util.HashMap;
 
 /**
- * Telepen encoding
+ * The Telepen class provides functionality for encoding data into the Telepen barcode symbology.
+ * This barcode type is capable of encoding both numeric and alphanumeric characters effectively,
+ * switching between modes as necessary based on the input data.
+ * The class extends BarcodeCommon and leverages common barcode handling functionalities
+ * such as validation, error management, and raw data processing.
+ * Key features include:
+ * - Support for automatic mode switching between numeric and alphanumeric encoding.
+ * - Calculation of a checksum for ensuring data integrity.
+ * - Generation of a complete encoded value incorporating start/stop codes, encoded data, and checksum.
+ * The encoding process involves several steps:
+ * - Initialization and setup of encoding sequences.
+ * - Conversion of input data into the appropriate barcode representation (numeric or ASCII mode).
+ * - Application of checksum and termination symbols according to Telepen rules.
+ * Note: This class is designed for internal barcode creation processes and provides public methods
+ * for retrieving the resulting encoded value.
  */
 public class Telepen extends BarcodeCommon {
     private static final HashMap<Character, String> Telepen_Code = new HashMap<>();
 
+    /**
+     * Enum representing start and stop codes used in the Telepen barcode encoding algorithm.
+     * Each enum constant maps to a specific character representation.
+     */
     public enum StartStopCode {
+        /**
+         * Represents the START1 code in the Telepen barcode encoding algorithm.
+         * START1 is a start code symbolized by its corresponding character value,
+         * which is encoded using the `Character.forDigit` method with a digit value of 0 and a radix of 10.
+         */
         START1(Character.forDigit(0, 10)),
+        /**
+         * Represents the STOP1 code in the Telepen barcode encoding algorithm.
+         * STOP1 corresponds to a specific character value derived using the
+         * `Character.forDigit` method with a digit value of 1 and a radix of 10.
+         */
         STOP1(Character.forDigit(1, 10)),
+        /**
+         * Represents the START2 code in the Telepen barcode encoding algorithm.
+         * START2 maps to a specific character value derived using the `Character.forDigit`
+         * method with a digit value of 2 and a radix of 10. This character is used
+         * as a start code in the Telepen symbology.
+         */
         START2(Character.forDigit(2, 10)),
+        /**
+         * Represents the STOP2 code in the Telepen barcode encoding algorithm.
+         * STOP2 corresponds to a specific character value derived using the
+         * `Character.forDigit` method with a digit value of 3 and a radix of 10.
+         * This character is used as a stop code in the Telepen symbology.
+         */
         STOP2(Character.forDigit(3, 10)),
+        /**
+         * Represents the START3 code in the Telepen barcode encoding algorithm.
+         * START3 is a start code symbolized by its corresponding character value,
+         * which is derived using the `Character.forDigit` method with a digit value of 4 and a radix of 10.
+         * This character is primarily used to indicate the beginning of a barcode sequence
+         * within the Telepen symbology.
+         */
         START3(Character.forDigit(4, 10)),
+        /**
+         * Represents the STOP3 code in the Telepen barcode encoding algorithm.
+         * STOP3 corresponds to a specific character value derived using the
+         * `Character.forDigit` method with a digit value of 5 and a radix of 10.
+         * This character is used as a stop code in the Telepen symbology.
+         */
         STOP3(Character.forDigit(5, 10)),;
 
         private char asChar() {

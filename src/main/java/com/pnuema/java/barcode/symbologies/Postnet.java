@@ -3,11 +3,23 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * Postnet encoding
+ * The Postnet class provides functionality to encode numeric data into
+ * the POSTNET barcode symbology. The POSTNET barcode is a form of postal
+ * barcode used by the United States Postal Service for faster and more
+ * accurate sorting of mail. This class extends the BarcodeCommon class to
+ * leverage common validation and error handling mechanisms.
  */
 public class Postnet extends BarcodeCommon {
     private final String[] POSTNET_Code = {"11000", "00011", "00101", "00110", "01001", "01010", "01100", "10001", "10010", "10100"};
 
+    /**
+     * Constructs a Postnet object with the specified input string.
+     *
+     * @param input the raw data string that represents numeric data to be encoded into
+     *              the POSTNET barcode. The input is processed and validated to ensure
+     *              it conforms to POSTNET requirements for encoding. Only numeric data
+     *              is valid for this parameter.
+     */
     public Postnet(String input) {
         setRawData(input);
     }

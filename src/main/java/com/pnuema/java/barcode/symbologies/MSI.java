@@ -4,13 +4,22 @@ import com.pnuema.java.barcode.BarcodeCommon;
 import com.pnuema.java.barcode.EncodingType;
 
 /**
- * MSI encoding
+ * The MSI class is responsible for encoding numeric input data using the MSI barcode symbology.
+ * MSI is commonly used for inventory management, storage, and cataloging purposes.
+ * This class extends the BarcodeCommon base class to provide specific encoding logic for the
+ * MSI barcode, including support for various checksum methods.
  */
 @SuppressWarnings("StringConcatenationInLoop")
 public class MSI extends BarcodeCommon {
     private final String[] MSI_Code = {"100100100100", "100100100110", "100100110100", "100100110110", "100110100100", "100110100110", "100110110100", "100110110110", "110100100100", "110100100110"};
     private final EncodingType encodedType;
 
+    /**
+     * Constructs a new MSI object with the provided input and encoding type.
+     *
+     * @param input      The raw data to be encoded.
+     * @param EncodedType The type of encoding to be applied to the data.
+     */
     public MSI(String input, EncodingType EncodedType) {
         encodedType = EncodedType;
         setRawData(input);

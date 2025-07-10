@@ -7,7 +7,11 @@ import java.util.HashMap;
 import static com.pnuema.java.barcode.utils.CharUtils.getChar;
 
 /**
- * Code 39 encoding
+ * The Code39 class provides functionality for encoding data into
+ * Code 39 barcodes, a widely used barcode standard. Code 39 is capable
+ * of encoding alphanumeric characters, and this implementation supports
+ * both standard and extended (full ASCII) modes.
+ * Constructors allow configuration of extended mode and checksum encoding.
  */
 public class Code39 extends BarcodeCommon {
     private final HashMap<Character, String> C39_Code = new HashMap<>(); //is initialized by init_Code39()

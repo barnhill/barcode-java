@@ -8,10 +8,83 @@ import java.util.List;
 import static com.pnuema.java.barcode.utils.CharUtils.getChar;
 
 /**
- * Code 128 encoding
+ * The {@code Code128} class implements the encoding of input data into the Code 128 barcode format.
+ * This class provides methods for generating and retrieving the encoded value of a barcode
+ * and supports multiple encoding subsets (Code 128A, Code 128B, and Code 128C).
+ * Code128 extends the {@code BarcodeCommon} class, inheriting common properties and behavior
+ * relevant to barcode generation.
+ * Fields:
+ * - {@code C128_Code}: Stores the final encoded representation of the input data as per the Code 128 specification.
+ * - {@code formattedData}: Holds the formatted data used during the barcode encoding process.
+ * - {@code startCharacter}: Represents the start character used in the resulting barcode, indicating the encoding type.
+ * - {@code type}: Specifies the encoding subset (A, B, C, or dynamic selection) used for generating the barcode.
+ * Constructors:
+ * - {@code Code128(String input)}: Encodes the given data in Code 128 format using dynamic type selection.
+ * - {@code Code128(String input, TYPES type)}: Encodes the given data in Code 128 format with the specified encoding type.
+ * Methods:
+ * - {@code private String encodeCode128()}: Encodes the input data as per the Code 128 encoding rules and generates the final barcode string.
+ * - {@code private void initCode128()}: Initializes and preprocesses data for the encoding process, ensuring conformity with Code 128 standards.
+ * - {@code private Entry findRow(String column, String match)}: Searches for the corresponding encoding row in the Code 128 table based on the given column and value.
+ * - {@code private CodeCharacter findStartorCodeCharacter(String s)}: Identifies the appropriate start or code character for the provided string.
+ * - {@code private String CalculateCheckDigit()}: Calculates the check digit for the barcode to ensure data integrity.
+ * - {@code private void breakUpDataForEncoding()}: Parses and breaks up input data to optimize encoding for the selected type or types.
+ * - {@code private void insertStartAndCodeCharacters()}: Inserts start characters and switches between different encoding subsets when required.
+ * - {@code private String getEncoding()}: Retrieves the barcode encoding string, which includes all formatted and encoded data.
+ * - {@code @Override public String getEncodedValue()}: Returns the fully encoded value of the barcode, ready for rendering or further use.
  */
 public class Code128 extends BarcodeCommon {
-    public enum TYPES { DYNAMIC, A, B, C }
+    /**
+     * Represents the available types for encoding in the Code128 symbology.
+     * The TYPES enum defines the different character sets that can be used
+     * for encoding data in the Code128 format. Each type corresponds
+     * to a specific Code 128 encoding subset or mode:
+     * - DYNAMIC: Automatically selects the appropriate encoding type based
+     *            on the input data.
+     * - A: Refers to Code 128A, which supports uppercase letters, control
+     *      characters, numbers, and special characters.
+     * - B: Refers to Code 128B, which supports upper and lowercase letters,
+     *      numbers, and special characters.
+     * - C: Refers to Code 128C, which is optimized for numeric data.
+     */
+    public enum TYPES {
+        /**
+         * Represents the 'DYNAMIC' encoding type in the Code128 symbology.
+         * The 'DYNAMIC' type automatically selects the most suitable encoding subset
+         * (A, B, or C) based on the input data. This allows for optimal encoding
+         * efficiency by dynamically determining the appropriate character set.
+         * It provides flexibility and minimizes the length of the resulting barcode
+         * while adhering to the Code128 standard.
+         */
+        DYNAMIC,
+        /**
+         * Represents the 'A' encoding type in the Code128 symbology.
+         * The 'A' encoding type, also referred to as Code 128A, supports
+         * uppercase letters, control characters, numbers, and special characters.
+         * It is commonly used for encoding data where the input primarily consists
+         * of uppercase alphanumeric and special character subsets.
+         */
+        A,
+        /**
+         * Represents the 'B' encoding type in the Code128 symbology.
+         * The 'B' encoding type, also known as Code 128B, supports both
+         * uppercase and lowercase letters, as well as numbers and special
+         * characters. It is suitable for encoding alphanumeric data with mixed
+         * casing and symbols, providing a versatile option for a wide
+         * range of barcode data requirements.
+         */
+        B,
+        /**
+         * Represents the 'C' encoding type in the Code128 symbology.
+         * The 'C' encoding type, also known as Code 128C, is optimized for encoding
+         * numeric data. It uses a compact encoding mechanism where pairs of digits
+         * are encoded as single code points, reducing the length of the resulting
+         * barcode and providing enhanced efficiency for numeric-only data.
+         * Code 128C is particularly suitable for applications that require encoding
+         * large sequences of numeric data, such as in logistics, shipping labels,
+         * and inventory management systems.
+         */
+        C
+    }
     private final List<Entry> C128_Code = new ArrayList<>();
     private final List<String> formattedData = new ArrayList<>();
     private Entry startCharacter = null;

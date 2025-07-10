@@ -3,7 +3,12 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * UPC-E encoding
+ * The UPCE class is designed to encode data into UPC-E format, commonly used in
+ * retail for compact barcode representation. This class provides utilities for
+ * encoding raw input data into the UPC-E barcode pattern, converting between
+ * UPC-A and UPC-E formats, and verifying the input for correctness.
+ * This class extends the BarcodeCommon base class to provide UPC-specific
+ * functionality.
  */
 public class UPCE extends BarcodeCommon {
     private final String[] EAN_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};

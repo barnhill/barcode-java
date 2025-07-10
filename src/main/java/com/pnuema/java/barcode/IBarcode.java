@@ -3,7 +3,8 @@ package com.pnuema.java.barcode;
 import java.util.List;
 
 /**
- * Barcode interface for symbology layout
+ * Defines the contract for a barcode object with methods to handle encoding,
+ * retrieving raw data, managing errors, and clearing error states.
  */
 public interface IBarcode {
     /**

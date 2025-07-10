@@ -5,13 +5,27 @@ import com.pnuema.java.barcode.BarcodeCommon;
 import java.util.HashMap;
 
 /**
- * UPC-A encoding
+ * Represents a UPC-A (Universal Product Code - A) barcode, allowing for encoding
+ * of raw UPC-A data into its equivalent graphical barcode format. The UPC-A
+ * format typically consists of 12 numeric digits, with the final digit serving
+ * as a check digit.
  */
 public class UPCA extends BarcodeCommon {
     private final String[] UPC_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
     private final String[] UPC_CodeB = {"1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100"};
     private final HashMap<String, String> countryCodes = new HashMap<>(); //is initialized by init_CountryCodes()
 
+    /**
+     * Constructs a UPCA (Universal Product Code - A) barcode instance, initializing
+     * the raw UPC code data provided as input. The input is stored in the instance
+     * and is later used for encoding the barcode.
+     *
+     * @param input the raw UPC-A code data as a string. The input must follow
+     *              the UPC-A format, typically consisting of 11 or 12 numeric characters.
+     *              It serves as the base data for generating the encoded barcode.
+     *              Passing invalid or non-numeric data may result in errors during
+     *              the encoding process.
+     */
     public UPCA(String input) {
         setRawData(input);
     }

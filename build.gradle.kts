@@ -1,5 +1,5 @@
 buildscript {
-    extra["gradle"] = "8.13"
+    extra["gradle"] = "8.14.3"
     extra["javaVersion"] = JavaVersion.VERSION_11
 }
 
@@ -32,7 +32,7 @@ dokka {
             remoteUrl(project.properties["POM_URL"].toString())
         }
         perPackageOption {
-            matchingRegex.set(".*utils.*") // will match all utils packages and sub-packages and skip javadoc for them
+            matchingRegex.set(".*utils.*") // will match all utils packages and sub-packages and skip Javadoc for them
             suppress.set(true)
         }
     }

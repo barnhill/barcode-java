@@ -3,9 +3,18 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * ISBN encoding
+ * The ISBN class is responsible for encoding input data into a valid ISBN or Bookland barcode format.
+ * It extends BarcodeCommon and provides a specific implementation for the ISBN encoding algorithm.
  */
 public class ISBN extends BarcodeCommon {
+    /**
+     * Constructs an ISBN object using the given input string.
+     * The input data is set to be encoded into a valid ISBN or Bookland barcode format.
+     *
+     * @param input the raw data string to encode. It should represent a numeric sequence
+     *              that adheres to the ISBN or Bookland format rules. The input is validated
+     *              and processed to meet the encoding requirements for these barcode types.
+     */
     public ISBN(String input) {
         setRawData(input);
     }

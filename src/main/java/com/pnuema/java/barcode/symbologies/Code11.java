@@ -3,11 +3,21 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * Code 11 encoding
+ * The Code11 class provides functionality for generating Code 11 barcodes.
+ * Code 11 is a barcode symbology that supports numeric data and the "-" character.
+ * The class derives from BarcodeCommon to use common barcode validation and processing mechanisms.
  */
 public class Code11 extends BarcodeCommon {
     private final String[] C11_Code = { "101011", "1101011", "1001011", "1100101", "1011011", "1101101", "1001101", "1010011", "1101001", "110101", "101101", "1011001" };
 
+    /**
+     * Constructor for the Code11 class. This constructor initializes a new instance of
+     * the Code11 barcode using the provided input string.
+     *
+     * @param input the raw data string to be encoded using the Code 11 algorithm.
+     *              This string will be internally set as the raw data for processing
+     *              and later encoding into a Code 11 barcode.
+     */
     public Code11(String input) {
         setRawData(input);
     }

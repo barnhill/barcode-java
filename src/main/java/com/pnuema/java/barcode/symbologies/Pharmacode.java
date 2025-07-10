@@ -3,7 +3,10 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * Pharmacode encoding
+ * Represents a Pharmacode barcode which is a one-dimensional barcode symbology used
+ * for encoding numeric data typically in the pharmaceutical industry.
+ * This class extends the BarcodeCommon class to provide specific encoding functionality
+ * for Pharmacode barcodes.
  */
 public class Pharmacode extends BarcodeCommon {
     /**

@@ -5,7 +5,10 @@ import com.pnuema.java.barcode.BarcodeCommon;
 import java.util.TreeMap;
 
 /**
- * EAN-13 encoding
+ * EAN13 class is responsible for encoding and parsing data using the EAN-13 barcode standard.
+ * It supports initialization with raw data, encoding the barcode value, and determining the
+ * country assigning manufacturer code from the given input data.
+ * This class extends the BarcodeCommon abstract class for general barcode functionality.
  */
 public class EAN13 extends BarcodeCommon {
     private final String[] EAN_CodeA = { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
@@ -16,16 +19,44 @@ public class EAN13 extends BarcodeCommon {
     private String assigningCountry = "";
     private boolean disableCountryCodeParsing = false;
 
+    /**
+     * Constructs an EAN13 object using the provided input string.
+     * This constructor initializes the raw barcode data and calculates the
+     * EAN-13 checksum if not already provided.
+     *
+     * @param input The EAN-13 barcode data as a string. The input should consist
+     *              of either 12 digits (in which case the checksum will be calculated automatically)
+     *              or 13 digits where the last digit is the checksum.
+     */
     public EAN13(String input) {
         setRawData(input);
         calculateCheckDigit();
     }
 
+    /**
+     * Constructs an EAN13 object with the given input while allowing the user
+     * to specify whether country code parsing should be disabled.
+     *
+     * @param input The EAN-13 barcode data as a string. This is the raw data
+     *              representing the barcode, which should consist of 12-13 digits.
+     *              If the number consists of 12 digits, the checksum will be calculated
+     *              automatically. If 13 digits are provided, the last digit is expected
+     *              to be the checksum.
+     * @param disableCountryCodeParsing A boolean flag indicating whether parsing
+     *                                  of the country code part of the barcode should
+     *                                  be disabled. When set to true, the country code
+     *                                  section will not be parsed or interpreted.
+     */
     public EAN13(String input, boolean disableCountryCodeParsing) {
         this(input);
         this.disableCountryCodeParsing = disableCountryCodeParsing;
     }
 
+    /**
+     * Retrieves the assigning country for the EAN-13 barcode.
+     *
+     * @return The name of the country responsible for assigning the barcode.
+     */
     public String getAssigningCountry() {
         return assigningCountry;
     }

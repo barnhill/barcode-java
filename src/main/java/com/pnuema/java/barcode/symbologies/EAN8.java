@@ -3,12 +3,23 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * EAN-8 encoding
+ * The EAN8 class provides functionality for encoding raw data
+ * into the EAN-8 barcode format. The EAN-8 is a compressed version
+ * of the EAN-13 barcode, used for smaller products or packaging where
+ * space is limited. This class handles validation, check digit calculation,
+ * and encoding of EAN-8 barcodes.
  */
 public class EAN8 extends BarcodeCommon {
     private final String[] EAN_CodeA = { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
     private final String[] EAN_CodeC = { "1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100" };
 
+    /**
+     * Constructs an EAN8 instance with the specified input data.
+     * This constructor initializes the raw data for the barcode
+     * and calculates the check digit if necessary.
+     *
+     * @param input the raw data to be encoded into the EAN-8 barcode format
+     */
     public EAN8(String input) {
         setRawData(input);
         calculateCheckDigit();

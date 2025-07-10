@@ -3,13 +3,24 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * UPC Supplement-5 encoding
+ * This class represents the UPC Supplemental 5-digit extension barcode encoding model.
+ * It encodes a 5-digit supplemental code used in conjunction with a primary UPC barcode.
+ * The primary purpose of the 5-digit supplemental is to encode additional information,
+ * such as price data or other identifiers, for certain product categories like books or periodicals.
+ * This class extends {@code BarcodeCommon} and implements the necessary behavior to validate,
+ * encode, and retrieve the encoded representation of the 5-digit supplemental barcode.
  */
 public class UPCSupplement5 extends BarcodeCommon {
     private final String[] EAN_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
     private final String[] EAN_CodeB = {"0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111"};
     private final String[] UPC_SUPP_5 = {"bbaaa", "babaa", "baaba", "baaab", "abbaa", "aabba", "aaabb", "ababa", "abaab", "aabab"};
 
+    /**
+     * Constructs a new UPCSupplement5 instance and initializes it with the given input data.
+     * The input data represents the raw 5-digit supplemental information for encoding.
+     *
+     * @param input the raw 5-digit supplemental string used for UPC encoding
+     */
     public UPCSupplement5(String input) {
         setRawData(input);
     }

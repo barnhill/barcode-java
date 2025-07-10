@@ -5,12 +5,24 @@ import com.pnuema.java.barcode.EncodingType;
 import com.pnuema.java.barcode.utils.Utils2of5;
 
 /**
- * Interleaved 2 of 5 encoding
+ * Represents a barcode type using the Interleaved 2 of 5 (I2/5) symbology.
+ * This barcode symbology is a continuous two-width code where digits are encoded in pairs.
+ * Implementation supports optional Mod10 checksum calculation for additional data integrity.
+ * This class extends {@code BarcodeCommon} to use common barcode functionalities, such as
+ * data validation and error handling, and adds specific encoding for the Interleaved 2 of 5 symbology.
  */
 public class Interleaved2of5 extends BarcodeCommon {
     private final String[] I25_Code = {"NNWWN", "WNNNW", "NWNNW", "WWNNN", "NNWNW", "WNWNN", "NWWNN", "NNNWW", "WNNWN", "NWNWN"};
     private final EncodingType type;
 
+    /**
+     * Constructs an instance of the Interleaved2of5 class, initializing it with the input data and
+     * the chosen encoding type. The input data represents the string to be encoded, and the type
+     * specifies the encoding format, such as standard or Mod10 checksum.
+     *
+     * @param input The data to be encoded using the Interleaved 2 of 5 symbology. Should be numeric.
+     * @param encodingType The specific encoding type, either standard Interleaved 2 of 5 or with Mod10.
+     */
     public Interleaved2of5(String input, EncodingType encodingType) {
         setRawData(input);
         type = encodingType;

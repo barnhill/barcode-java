@@ -5,11 +5,23 @@ import com.pnuema.java.barcode.BarcodeCommon;
 import java.util.HashMap;
 
 /**
- * Codabar encoding
+ * Represents a Codabar barcode encoder.
+ * This class extends the functionality of the BarcodeCommon base class
+ * to provide an implementation for encoding data using the Codabar barcode standard.
+ * Codabar is a discrete, self-checking barcode symbology commonly used in libraries,
+ * blood banks, and air parcel services.
  */
 public class Codabar extends BarcodeCommon {
     private final HashMap<Character, String> codabarCode = new HashMap<>();
 
+    /**
+     * Constructs an instance of the Codabar barcode class using the provided input string.
+     * The input string is set as the raw data for encoding using the Codabar algorithm.
+     *
+     * @param input The raw data string to be encoded. This string is used as the input
+     *              for generating the Codabar barcode. It may need to conform to specific
+     *              Codabar barcode format rules for successful encoding.
+     */
     public Codabar(String input) {
         setRawData(input);
     }
@@ -21,7 +33,7 @@ public class Codabar extends BarcodeCommon {
     private String encodeCodabar() {
         if (getRawData().length() < 2) error("ECODABAR-1: Data format invalid. (Invalid length)");
 
-        //check first char to make sure it is a start/stop char
+        //check the first char to make sure it is a start/stop char
         switch (String.valueOf(getRawData().charAt(0)).toUpperCase().trim()) {
             case "A":
             case "B":

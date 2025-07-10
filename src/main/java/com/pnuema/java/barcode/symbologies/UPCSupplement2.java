@@ -3,13 +3,30 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * UPC Supplement-2 encoding
+ * Encodes a 2-digit UPC Supplemental barcode. The supplemental barcode is often
+ * added to the primary UPC barcode to encode additional information such as pricing
+ * or issue numbers for magazines.
+ * This class extends the BarcodeCommon class, which provides foundational methods
+ * for barcode encoding and validation. The UPC Supplemental 2-digit (UPC-E Add-On)
+ * uses a parity-based system for digit encoding and requires a numeric string of length 2.
+ * The encoding process follows these steps:
+ * 1. Validate the input data for length and numeric content.
+ * 2. Generate a parity pattern based on the modulus-4 sum of the input digits.
+ * 3. Encode each digit using a pre-defined set of patterns for odd ("a") or even ("b") parity.
  */
 public class UPCSupplement2 extends BarcodeCommon {
     private final String[] EAN_CodeA = {"0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011"};
     private final String[] EAN_CodeB = {"0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111"};
     private final String[] UPC_SUPP_2 = {"aa", "ab", "ba", "bb"};
 
+    /**
+     * Constructs a UPCSupplement2 object with the specified input string.
+     * This constructor initializes the object by setting the raw data for the
+     * 2-digit UPC Supplemental barcode encoding process.
+     *
+     * @param input the string input representing the 2-digit data for the UPC Supplemental barcode.
+     *              The input must be a numeric string with a length of 2 characters.
+     */
     public UPCSupplement2(String input) {
         setRawData(input);
     }

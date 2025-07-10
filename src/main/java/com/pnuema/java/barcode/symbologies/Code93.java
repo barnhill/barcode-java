@@ -7,7 +7,12 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Code 93 encoding
+ * The Code93 class provides functionality for generating Code 93 barcodes.
+ * Code 93 is a continuous symbology encoding full ASCII and designed to have
+ * higher data density and data security than Code 39.
+ * This class inherits from BarcodeCommon and performs operations such as
+ * initializing the Code 93 character set, encoding data, and adding checksum
+ * control characters.
  */
 public class Code93 extends BarcodeCommon {
     private final List<Entry> C93_Code = new ArrayList<>();

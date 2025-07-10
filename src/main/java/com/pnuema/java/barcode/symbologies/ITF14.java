@@ -3,11 +3,23 @@ package com.pnuema.java.barcode.symbologies;
 import com.pnuema.java.barcode.BarcodeCommon;
 
 /**
- * ITF-14 encoding
+ * Represents the ITF-14 barcode symbology, which is a subset of the Interleaved 2 of 5 (ITF) format.
+ * ITF-14 is commonly used to encode Global Trade Item Numbers (GTIN) for shipping and logistics.
+ * This class provides functionality to validate, encode, and generate barcodes compliant with the ITF-14 standard.
  */
 public class ITF14 extends BarcodeCommon {
     private final String[] ITF14_Code = {"NNWWN", "WNNNW", "NWNNW", "WWNNN", "NNWNW", "WNWNN", "NWWNN", "NNNWW", "WNNWN", "NWNWN"};
 
+    /**
+     * Constructs an ITF14 barcode object and initializes the raw data and check digit.
+     * The constructor sets the provided input string as raw data and calculates the check digit,
+     * ensuring that the ITF-14 barcode is valid and ready for encoding.
+     *
+     * @param input the raw data string used to generate the ITF-14 barcode. This string must meet
+     *              the requirements for ITF-14 barcodes, including proper length and content. The
+     *              constructor validates the input and modifies it by appending a calculated check
+     *              digit if necessary.
+     */
     public ITF14(String input) {
         setRawData(input);
         checkDigit();

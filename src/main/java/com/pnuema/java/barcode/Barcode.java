@@ -18,10 +18,81 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 @SuppressWarnings({"WeakerAccess", "unused", "DuplicatedCode"})
 public class Barcode {
+    /**
+     * Represents the types of file formats that can be used for saving files.
+     * This enumeration includes common image file formats as well as an unspecified option.
+     * Enum Constants:
+     * - JPG: Represents the JPEG image format.
+     * - BMP: Represents the BMP (Bitmap) image format.
+     * - PNG: Represents the PNG (Portable Network Graphics) image format.
+     * - GIF: Represents the GIF (Graphics Interchange Format) image format.
+     * - TIFF: Represents the TIFF (Tagged Image File Format) image format.
+     * - UNSPECIFIED: Represents an undefined or unspecified file format.
+     */
+    public enum SaveTypes {
+        /**
+         * Represents the JPEG image file format.
+         * Commonly used for storing and compressing digital images, particularly for photographs.
+         */
+        JPG,
+        /**
+         * Represents the BMP (Bitmap) image file format.
+         * BMP is a raster graphics image file format used to store bitmap digital images.
+         * It is commonly utilized for simple and uncompressed images.
+         */
+        BMP,
+        /**
+         * Represents the PNG (Portable Network Graphics) image file format.
+         * PNG is a raster-graphics file format that supports lossless data compression.
+         * It is widely used for high-quality images with support for transparency.
+         */
+        PNG,
+        /**
+         * Represents the GIF (Graphics Interchange Format) image file format.
+         * GIF is widely used for animated images and simple graphics with limited color palettes.
+         */
+        GIF,
+        /**
+         * Represents the TIFF (Tagged Image File Format) image file format.
+         * TIFF is a flexible and adaptable file format used for storing high-quality raster graphics and images.
+         * It is commonly used in applications requiring detailed image data, such as desktop publishing and professional photography.
+         */
+        TIFF,
+        /**
+         * Represents an undefined or unspecified file format.
+         * This constant is used when no specific file format is selected or applicable.
+         */
+        UNSPECIFIED
+    }
 
-    public enum SaveTypes {JPG, BMP, PNG, GIF, TIFF, UNSPECIFIED}
-
-    public enum AlignmentPositions {CENTER, LEFT, RIGHT}
+    /**
+     * The AlignmentPositions enum represents the alignment positions
+     * that can be used to specify the layout or positioning of elements.
+     * It defines the following constants:
+     * - CENTER: Represents a centered alignment.
+     * - LEFT: Represents a left-aligned position.
+     * - RIGHT: Represents a right-aligned position.
+     */
+    public enum AlignmentPositions {
+        /**
+         * Represents a centered alignment position.
+         * Typically used to specify that an element should be positioned
+         * or aligned at the center within its container or layout.
+         */
+        CENTER,
+        /**
+         * Represents a left-aligned position.
+         * Typically used to specify that an element should be positioned
+         * or aligned to the left within its container or layout.
+         */
+        LEFT,
+        /**
+         * Represents a right-aligned position.
+         * Typically used to specify that an element should be positioned
+         * or aligned to the right within its container or layout.
+         */
+        RIGHT
+    }
 
     private IBarcode ibarcode;
     private String rawData = "";
